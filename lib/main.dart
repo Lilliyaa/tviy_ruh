@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return MaterialApp(
-      title: "Bottom Navigation Bar",
+      title: "Bottom Navigation213124214 Bar",
       home: Nav(),
     );
   }
