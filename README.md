@@ -1,6 +1,6 @@
 # flutter_apptest
 
-A new Flutter application 13.
+A new Flutter application 12.
 
 ## Getting Started
 
