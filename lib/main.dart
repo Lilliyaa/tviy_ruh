@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/Nav.dart';
 
+import 'ui/theme.dart';
+
 void main(){
   runApp(MyApp());
 }
