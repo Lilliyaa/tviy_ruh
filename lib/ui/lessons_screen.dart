@@ -37,7 +37,7 @@ class _LessonsState extends State<Lessons>{
                       return new StuffInTiles(context, toTiles(snapshot.data)[index], snapshot.data[index]);
                     },
                     itemCount: snapshot.data.length,
-                    padding: EdgeInsets.only(left: 15, right: 15),
+                    padding: EdgeInsets.only(left: 16, right: 15),
                   );
                   } else{
                     return Center(
