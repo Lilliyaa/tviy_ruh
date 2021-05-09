@@ -1,8 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_apptest">
+    package="com.example.flutter_apptest"
+    >
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="flutter_apptest"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+       android:usesCleartextTraffic="true">
+       <meta-data android:name="io.flutter.network-policy"
+           android:resource="@xml/network_security_config"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -37,5 +42,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyB-hahGmSsx13Gm-bWLBRVCazu8qplFJ7w"/>
     </application>
 </manifest>

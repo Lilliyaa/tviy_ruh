@@ -21,11 +21,11 @@ const Duration _kExpand = Duration(milliseconds: 200);
 ///    expansion tile represents a sublist.
 ///  * The "Expand/collapse" section of
 ///    <https://material.io/guidelines/components/lists-controls.html>.
-class ExpansionTile extends StatefulWidget {
+class CustomExpansionTile extends StatefulWidget {
   /// Creates a single-line [ListTile] with a trailing button that expands or collapses
   /// the tile to reveal or hide the [children]. The [initiallyExpanded] property must
   /// be non-null.
-  const ExpansionTile({
+  const CustomExpansionTile({
     Key key,
     this.headerBackgroundColor,
     this.leading,
@@ -77,10 +77,10 @@ class ExpansionTile extends StatefulWidget {
   final bool initiallyExpanded;
 
   @override
-  _ExpansionTileState createState() => _ExpansionTileState();
+  _CustomExpansionTileState createState() => _CustomExpansionTileState();
 }
 
-class _ExpansionTileState extends State<ExpansionTile>
+class _CustomExpansionTileState extends State<CustomExpansionTile>
     with SingleTickerProviderStateMixin {
   static final Animatable<double> _easeOutTween =
       CurveTween(curve: Curves.easeOut);
@@ -177,8 +177,14 @@ class _ExpansionTileState extends State<ExpansionTile>
                       .copyWith(color: titleColor),
                   child: Row(
                     children: [
-                      Icon(Icons.circle_notifications),
-                      widget.title,]
+                      // Тут в будующем будет иконочка с прогрессом. Когда добавим, не забть уменьшить ширину текста
+                      //Icon(Icons.circle_notifications),
+                      Container(
+                        // вот тут уменьшить
+                        width: 250,
+                        child: widget.title,
+                      )
+                    ]
                   )
                 ),
                 trailing: widget.trailing ??
@@ -186,7 +192,7 @@ class _ExpansionTileState extends State<ExpansionTile>
                       turns: _iconTurns,
                       child: Icon(
                         Icons.expand_more,
-                        color: widget.iconColor ?? Colors.grey,
+                        color: Colors.grey,
                       ),
                     ),
               ),

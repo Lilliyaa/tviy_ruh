@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_apptest/home_screen.dart';
-import 'package:flutter_apptest/lessons_screen.dart';
 import 'package:flutter_svg/svg.dart';
+
+
+import 'package:flutter_apptest/theme.dart';
+
+import 'home_screen.dart';
+import 'lessons_screen.dart';
+import 'map_screen.dart';
 
 class Nav extends StatefulWidget{
   @override
@@ -11,9 +16,10 @@ class Nav extends StatefulWidget{
 class _NavState extends State<Nav>{
   int _selectedIndex = 0;
    String text = "bar";
+   // Вот сюда вписіваем странички, которіе будут открываться в навигации, вместо Text("ololo")
   List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Text('Messages'),
+    myMap(),
     Text('Profile'),
     Lessons(),
     Text('Profile'),
@@ -35,18 +41,14 @@ class _NavState extends State<Nav>{
   @override Widget build (BuildContext context){
 
     return Scaffold(
+
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           text,
-          style: TextStyle(
-            color: Color(0xff4b4a4a),
-            fontSize: 22,
-            fontFamily: "Roboto",
-            fontWeight: FontWeight.w500,
-          ),
+          style: Theme.of(context).appBarTheme.titleTextStyle,
         ),
-        backgroundColor: Color(0xfffebb57),
+        //backgroundColor: Color(0xfffebb57),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
