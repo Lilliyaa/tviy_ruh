@@ -6,7 +6,7 @@ class Home extends StatelessWidget{
   Widget build (BuildContext context){
     return Center(
         child: Column(children: <Widget>[
-          Icon(Icons.home), Icon(Icons.home),
+         Icon(Icons.home),
         ],
         )
     );
