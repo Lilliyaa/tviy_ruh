@@ -3,12 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/my_tile.dart';
-import 'file:///C:/Users/Swilli/AndroidStudioProjects/flutter_apptest/lib/model/custom_expansion_tile.dart' as custom;
 import 'package:flutter_apptest/model/paragraph.dart';
 import 'package:flutter_apptest/model/stuff_in_tiles.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 
-import 'SecondScreen.dart';
 
 class Lessons extends StatefulWidget{
 
@@ -29,19 +27,22 @@ class _LessonsState extends State<Lessons>{
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
+          color: Theme.of(context).primaryColor,
             child: FutureBuilder<List<Paragraph>>(
                 future: _lessons,
                 builder: (context, snapshot){
                   if(snapshot.hasData){
                   return new ListView.builder(
                     itemBuilder: (BuildContext context, int index, ){
-                      return new StuffInTiles(context, toTiles(snapshot.data)[index]);
+                      return new StuffInTiles(context, toTiles(snapshot.data)[index], snapshot.data[index]);
                     },
                     itemCount: snapshot.data.length,
                     padding: EdgeInsets.only(left: 15, right: 15),
                   );
                   } else{
-                    return CircularProgressIndicator();
+                    return Center(
+                        child: CircularProgressIndicator()
+                    );
                   }
                 }
 

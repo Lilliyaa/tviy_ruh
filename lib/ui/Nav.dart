@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apptest/assets/nav_icons.dart';
 import 'package:flutter_svg/svg.dart';
 
 
@@ -53,42 +54,38 @@ class _NavState extends State<Nav>{
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar:
-      BottomNavigationBar(items: const <BottomNavigationBarItem>[
+      bottomNavigationBar: BottomNavigationBar(items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: Icon(Icons.car_repair,
-              color: Colors.green,),
+            icon: Icon(NavIcons.nav_car,),
             title: Text('')
         ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.home,
-              color: Colors.green,),
+            icon: Icon(NavIcons.nav_sign,),
             title: Text('')
         ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.home,
-              color: Colors.green,),
+            icon: Icon(NavIcons.nav_test,),
             title: Text('')
         ),
         BottomNavigationBarItem(
-            icon: Icon(
-                Icons.home,
-              color: Colors.green,),
+            icon: Icon(NavIcons.nav_study,),
             title: Text('')
         ),
         BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Colors.green,
+            icon: Icon(NavIcons.nav_more,
             ),
             title: Text('')
         ),
       ],
         showSelectedLabels: false,
+        //backgroundColor: Colors.red,
+
+       // selectedItemColor: Colors.red,
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,
         onTap: _onItemTap,
       ),
+
     );
   }
 }
