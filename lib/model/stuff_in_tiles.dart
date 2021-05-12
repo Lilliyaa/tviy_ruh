@@ -24,12 +24,17 @@ class StuffInTiles extends StatelessWidget  {
             if(t.type==0) {
               Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
-                    LessonScreen(paragraph)),
+                    LessonScreen(paragraph, 0)),
               );
             } else if(t.type==1){
               Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
-                    LessonScreen(paragraph)),
+                    LessonScreen(paragraph, 1)),
+              );
+            }else if(t.type==2){
+              Navigator.push(context,
+                MaterialPageRoute(builder: (context) =>
+                    LessonScreen(paragraph, 2)),
               );
             }
           },
