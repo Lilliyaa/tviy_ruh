@@ -4,6 +4,12 @@ ThemeData myLightTheme = ThemeData(
     primaryColor: Color.fromRGBO(252, 243, 227, 1),
     bottomAppBarColor: Color(0xff4b4a4a),
 
+    textTheme: TextTheme(
+      headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+      headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+      bodyText2: TextStyle(fontSize: 16.0, fontFamily: 'Roboto', color: Colors.black),
+    ),
+
     appBarTheme: AppBarTheme(
       backgroundColor: Color.fromRGBO(254, 187, 87, 1),
       titleTextStyle: TextStyle(
