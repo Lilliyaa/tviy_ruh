@@ -2,9 +2,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/constants/strings.dart';
-import 'package:flutter_apptest/model/my_tile.dart';
+import 'package:flutter_apptest/model/tiles/my_tile.dart';
 import 'package:flutter_apptest/model/paragraph.dart';
-import 'package:flutter_apptest/model/stuff_in_tiles.dart';
+import 'package:flutter_apptest/model/tiles/stuff_in_tiles.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 
 

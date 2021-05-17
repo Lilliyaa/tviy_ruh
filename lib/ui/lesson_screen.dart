@@ -15,7 +15,7 @@ class LessonScreen extends StatefulWidget{
     _widgetOptions = <Widget>[
       LessonText(paragraph.id),
       LessonVideo(paragraph.video),
-      LessonTest(),
+      LessonTest(paragraph.id),
     ];
   }
 

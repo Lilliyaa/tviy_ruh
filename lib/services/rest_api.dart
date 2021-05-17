@@ -1,5 +1,6 @@
 import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/paragraph.dart';
+import 'package:flutter_apptest/model/test.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -32,4 +33,18 @@ class APIManager{
     }
     return lessonText;
   }
+
+  static Future<Test> getTest(int id) async{
+    Test test = new Test();
+    var uri = Uri.http(Strings.baseUrl, 'api/load_lesson_test.php');
+    var response = await http.post(uri, body: {
+      "id": json.encode(id)
+    });
+    if(response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body.toString());
+      test = Test.fromJson(jsonData);
+    }
+    return test;
+  }
+
 }
