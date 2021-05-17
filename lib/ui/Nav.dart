@@ -22,7 +22,7 @@ class _NavState extends State<Nav>{
   List<Widget> _widgetOptions = <Widget>[
     Home(),
     myMap(),
-    Text('exam'),
+    Exams(),
     Lessons(),
     Text('Profile'),
   ];
