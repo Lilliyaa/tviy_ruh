@@ -32,10 +32,11 @@ class Exams extends StatelessWidget {
               future: _exams,
               builder: (context, snapshot){
                 if(snapshot.hasData){
+                  List<Exam> nexams = snapshot.data ?? [];
                   return Wrap(
                     spacing: 10,
                     runSpacing: 20,
-                    children: snapshot.data.map((e) => ExamIco(e)).toList(),
+                    children: nexams.map((e) => ExamIco(e)).toList(),
                   );
                 }else{
                   return Center(
@@ -95,3 +96,4 @@ class ExamIco extends StatelessWidget {
     );
   }
 }
+//hello
