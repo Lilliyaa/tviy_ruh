@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_apptest/assets/nav_icons.dart';
 import 'constants.dart';
 
 
@@ -49,10 +49,10 @@ class _HomeState extends State<Home> {
                     )
                   ],
                 ),
-                Image.asset(
-                  "assets/images/${post["image"]}",
-                  height: double.infinity,
-                )
+                // Image.asset(
+                //   "assets/images/${post["image"]}",
+                //   height: double.infinity,
+                // )
               ],
             ),
           )));
