@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context){
     return MaterialApp(
       theme: myLightTheme,
-      title: "Bottom Nav Bar",
+      title: "Bottom Nav Bar ",
       home: Nav(),
     );
   }
