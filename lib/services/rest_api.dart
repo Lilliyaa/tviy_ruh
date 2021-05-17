@@ -34,10 +34,12 @@ class APIManager{
     return lessonText;
   }
 
-  static Future<List<Exam>> selectExams() async{
+  static Future<List<Exam>> selectExams(int student_id) async{
     List<Exam> exams = [];
     var uri = Uri.http(Strings.baseUrl, 'api/select_exams.php');
-    var response = await http.get(uri);
+    var response = await http.post(uri, body: {
+      "student_id": json.encode(student_id)
+    });
     if(response.statusCode == 200) {
       var jsonData = jsonDecode(response.body.toString());
       for (var u in jsonData) {
