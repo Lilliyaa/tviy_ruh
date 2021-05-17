@@ -40,7 +40,6 @@ class APIManager{
     var response = await http.post(uri, body: {
       "student_id": json.encode(student_id)
     });
-    //var response = await http.get(uri);
     if(response.statusCode == 200) {
       var jsonData = jsonDecode(response.body.toString());
       for (var u in jsonData) {
