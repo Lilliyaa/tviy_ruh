@@ -4,7 +4,7 @@ import 'package:flutter_apptest/services/rest_api.dart';
 
 class Exams extends StatelessWidget {
 
-  final Future<List<Exam>> _exams = APIManager.selectExams(1); //Add student_id picking
+  final Future<List<Exam>> _exams = APIManager.selectExams(1);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class ExamIco extends StatelessWidget {
   //const ExamIco({Key key}) : super(key: key);
 
   final Exam _exam;
-  const ExamIco(this._exam) : super();
+ const ExamIco(this._exam) : super();
 
   Color getColor(){
     Color color;
