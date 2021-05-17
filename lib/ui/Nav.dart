@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/assets/nav_icons.dart';
+import 'package:flutter_apptest/ui/exams_screen.dart';
 import 'package:flutter_svg/svg.dart';
 
 
@@ -21,7 +22,7 @@ class _NavState extends State<Nav>{
   List<Widget> _widgetOptions = <Widget>[
     Home(),
     myMap(),
-    Text('Profile'),
+    Exams(),
     Lessons(),
     Text('Profile'),
   ];
