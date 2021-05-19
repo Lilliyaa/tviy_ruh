@@ -24,21 +24,45 @@ class LessonScreen extends StatefulWidget{
 }
 
 class _MySecondScreenState extends State<LessonScreen>{
+  bool _leftArrowVisible;
+  bool _rightArrowVisible;
+
+  void _setVisibility(){
+    if (widget._selectedIndex == 0){
+      _leftArrowVisible = false;
+      _rightArrowVisible = true;
+    } else if(widget._selectedIndex == 2){
+      _leftArrowVisible = true;
+      _rightArrowVisible = false;
+    } else{
+      _leftArrowVisible = true;
+      _rightArrowVisible = true;
+    }
+  }
 
   void _back(){
+
     setState(() {
       if(widget._selectedIndex>0) {
         widget._selectedIndex--;
       }
+      _setVisibility();
     });
   }
 
   void _ahead(){
+
     setState(() {
       if(widget._selectedIndex<2) {
         widget._selectedIndex++;
       }
+      _setVisibility();
     });
+  }
+  @override
+  void initState() {
+    _setVisibility();
+    super.initState();
   }
 
   @override
@@ -58,12 +82,13 @@ class _MySecondScreenState extends State<LessonScreen>{
                 accentColor: Colors.transparent,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: 50.0,
-                        height: 20.0,
-                        child: new FloatingActionButton(
+                        margin: EdgeInsets.only(left: 30),
+                        child: Visibility (
+                          visible: _leftArrowVisible,
+                          child: new FloatingActionButton(
                           heroTag: "btn1",
                           tooltip: 'Increment',
                           foregroundColor:  Color(0xfffebb57), // Colors.white,
@@ -74,15 +99,11 @@ class _MySecondScreenState extends State<LessonScreen>{
                           ),
                           onPressed: _back,
                         ),
-                      ),
-                      SizedBox(
-                        width: 200.0,
-                        height: 0,
-                        child: Text(""),
+                        )
                       ),
                       Container(
-                        width: 10.0,
-                        height: 20.0,
+                        child: Visibility (
+                        visible: _rightArrowVisible,
                         child: new FloatingActionButton(
                           heroTag: "btn2",
                           tooltip: 'Increment',
@@ -94,6 +115,7 @@ class _MySecondScreenState extends State<LessonScreen>{
                           ),
                           onPressed: _ahead,
                         ),
+                        )
                       )
                     ],
                   )

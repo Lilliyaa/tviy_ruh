@@ -22,10 +22,10 @@ class LessonText extends StatelessWidget{
                       color: Colors.white, //new Color.fromRGBO(255, 0, 0, 0.0),
                       borderRadius: new BorderRadius.all( Radius.circular(15.0))
                   ),
-              margin: EdgeInsets.only(left: 10.0, top: 10, right: 10, bottom: 60),
+              margin: EdgeInsets.only(left: 10.0, top: 10, right: 10, bottom: 80),
                   child: SingleChildScrollView(
                     padding: EdgeInsets.all(15.0),
-                      child: Text(snapshot.data)
+                      child: Text(snapshot.data, style: Theme.of(context).textTheme.bodyText1,)
                   )
               );
 

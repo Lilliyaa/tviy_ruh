@@ -7,7 +7,19 @@ ThemeData myLightTheme = ThemeData(
     textTheme: TextTheme(
       headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
       headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-      bodyText2: TextStyle(fontSize: 16.0, fontFamily: 'Roboto', color: Colors.black),
+
+      bodyText1: TextStyle(fontSize: 16.0, fontFamily: 'Roboto', color: Color(0xff4b4a4a)
+      ),
+
+      //for question`s text
+      bodyText2: TextStyle(fontSize: 18.0, fontFamily: 'Roboto', color: Colors.black, shadows: <Shadow>[
+        Shadow(
+          offset: Offset(2.0, 2.0),
+          blurRadius: 3.0,
+          color:Color.fromRGBO(140, 140, 140, 0.5),
+        ),
+      ],
+      ),
     ),
 
     appBarTheme: AppBarTheme(
