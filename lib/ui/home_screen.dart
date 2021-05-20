@@ -178,7 +178,7 @@ class _HomeState extends State<Home> {
           ),
           // Image.asset(
           //   "assets/images/${post["image"]}",
-          //   height: double.infinity,
+          //   height: double.infinity1,
           // )
         ),
       );
