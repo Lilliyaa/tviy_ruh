@@ -1,5 +1,6 @@
 import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/paragraph.dart';
+import 'package:flutter_apptest/model/test.dart';
 import 'package:flutter_apptest/model/exam.dart';
 import 'package:flutter_apptest/model/provider.dart';
 import 'package:http/http.dart' as http;
@@ -34,8 +35,25 @@ class APIManager{
     }
     return lessonText;
   }
+  
+  static Future<List<Test>> getTest(int id) async{
+    List<Test> test = [];
+    var uri = Uri.http(Strings.baseUrl, 'api/load_lesson_test.php');
 
-  static Future<List<Exam>> selectExams(int student_id) async{
+   var response = await http.post(uri, body: {
+      "id": json.encode(id)
+    });
+    if(response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body.toString());
+      for (var u in jsonData) {
+        Test temp = Test.fromJson(u);
+        test.add(temp);
+      }
+    }
+    return test;
+  }
+
+static Future<List<Exam>> selectExams(int student_id) async{
     List<Exam> exams = [];
     var uri = Uri.http(Strings.baseUrl, 'api/select_exams.php');
     var response = await http.post(uri, body: {
@@ -52,6 +70,7 @@ class APIManager{
     return exams;
   }
 
+
   static Future<List<Provider>> getProviderData() async{
     List<Provider> providers = [];
     var uri = Uri.http(Strings.baseUrl, 'api/load_provider.php');
@@ -66,4 +85,8 @@ class APIManager{
     }
     return providers;
   }
+
+  
+  
+
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/assets/nav_icons.dart';
+import 'package:flutter_apptest/ui/welcome_screen.dart';
 import 'package:flutter_apptest/ui/exams_screen.dart';
 import 'package:flutter_svg/svg.dart';
-
 
 import 'package:flutter_apptest/theme.dart';
 
@@ -25,13 +25,15 @@ class _NavState extends State<Nav>{
     Exams(),
     Lessons(),
     Text('Profile'),
+    WelcomeScreen(),
   ];
   List<String> _screen_names = <String>[
     "Пошук",
     "Розпізнавання знаку",
     "Екзаменаційні білети",
     "Заняття",
-    "Додатково"
+    "Додатково",
+    "Реєстрація"
   ];
 
   void _onItemTap(int index){
@@ -81,7 +83,7 @@ class _NavState extends State<Nav>{
         showSelectedLabels: false,
         //backgroundColor: Colors.red,
 
-       // selectedItemColor: Colors.red,
+        // selectedItemColor: Colors.red,
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,
         onTap: _onItemTap,

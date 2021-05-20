@@ -155,7 +155,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
           Container(
             decoration: BoxDecoration(
             color: _backgroundColor.value ?? Colors.white,
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(20),
       ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
