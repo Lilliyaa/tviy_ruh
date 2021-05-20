@@ -46,7 +46,7 @@ class APIManager{
       for (var u in jsonData) {
         Exam exam = Exam.fromJson(u);
         exams.add(exam);
-        print(exam.toString());
+      //  print(exam.toString());
       }
     }
     return exams;
@@ -61,10 +61,9 @@ class APIManager{
       for (var u in jsonData) {
         var provider = Provider.fromJson(u);
         providers.add(provider);
-        print(provider.toString());
+        //print(provider.toString());
       }
     }
     return providers;
   }
-
 }
