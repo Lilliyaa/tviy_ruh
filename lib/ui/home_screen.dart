@@ -5,7 +5,6 @@ import 'package:flutter_apptest/model/provider.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 import 'constants.dart';
 
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -14,13 +13,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   final Future<List<Provider>> providers = APIManager.getProviderData();
+  List<Provider> providersList;
   List<Widget> itemsData = [];
 
-
   void getPostsData() {
-    List<dynamic> responseList = FOOD_DATA;
     List<Widget> listItems = [];
-    responseList.forEach((post) {
+    providersList.forEach((provider) {
       listItems.add(Container(
           height: 150,
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -39,24 +37,27 @@ class _HomeState extends State<Home> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text(
-                      post["name"],
-                      style: const TextStyle(fontSize: 28,
+                      provider.name,
+                      style: const TextStyle(
+                        fontSize: 28,
                         color: Colors.white,
-                        decoration: TextDecoration.underline,),
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                     SizedBox(
                       height: 5,
                     ),
                     Text(
-                      "Категорії: " + post["categories"],
+                      "Категорії: " + provider.category,
                       style: const TextStyle(fontSize: 17, color: Colors.white),
                     ),
                     SizedBox(
                       height: 5,
                     ),
                     Text(
-                      " ${post["price"]}",
-                      style: const TextStyle(fontSize: 25,
+                      provider.price,
+                      style: const TextStyle(
+                          fontSize: 25,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
@@ -64,8 +65,9 @@ class _HomeState extends State<Home> {
                       height: 5,
                     ),
                     Text(
-                      " ${post["address"]}",
-                      style: const TextStyle(fontSize: 15,
+                      provider.address,
+                      style: const TextStyle(
+                          fontSize: 15,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )
@@ -92,52 +94,39 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery
-        .of(context)
-        .size;
+    final Size size = MediaQuery.of(context).size;
 
     return SafeArea(
         child: Scaffold(
-        backgroundColor: Color.fromRGBO(252, 243, 227, 1.0),
-
-    body: Container(
-    height: size.height,
-    child: Column(
-    children: <Widget>[
-
-    const SizedBox(
-    height: 10,
-    ),
-
-    Expanded(
-    child: FutureBuilder<List<Provider>>(
-    future: providers,
-    builder: (context, snapshot){
-    if(snapshot.hasData){
-       return ListView.builder(
-
-       itemCount: itemsData.length,
-       physics: BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-    return itemsData[index];
-    }),
-    ],}
-    else {
-    return Center(
-    child: CircularProgressIndicator()
-    );
-    }
-    }
-    )
-    ,
-    )
-    ,
-    )
-    ,
-    );
+      backgroundColor: Color.fromRGBO(252, 243, 227, 1.0),
+      body: Container(
+        height: size.height,
+        child: Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: FutureBuilder<List<Provider>>(
+                  future: providers,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      providersList = snapshot.data;
+                      getPostsData();
+                      return ListView.builder(
+                          itemCount: itemsData.length,
+                          physics: BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return itemsData[index];
+                          });
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  }),
+            ),
+          ],
+        ),
+      ),
+    ));
   }
 }
-
-
-
-
