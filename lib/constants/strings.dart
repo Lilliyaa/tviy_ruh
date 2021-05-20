@@ -5,4 +5,6 @@ class Strings{
   static String lesson = "Урок";
   static String video = "Відео";
   static String test = "Тест";
+  static String enter = "Увійти";
+  static String singUp = "Зареєструватися";
 }

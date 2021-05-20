@@ -34,10 +34,10 @@ ThemeData myLightTheme = ThemeData(
     ),
 
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-       unselectedItemColor: Color.fromRGBO(140, 140, 140, 1),
-        selectedItemColor: Colors.white,
-        backgroundColor: Color(0xff4b4a4a),
-        type: BottomNavigationBarType.fixed,
+      unselectedItemColor: Color.fromRGBO(140, 140, 140, 1),
+      selectedItemColor: Colors.white,
+      backgroundColor: Color(0xff4b4a4a),
+      type: BottomNavigationBarType.fixed,
     )
 
 );
