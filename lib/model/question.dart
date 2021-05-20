@@ -15,26 +15,30 @@ class Question {
   String image;
   List<Answer> answers;
   bool rightAnswered;
-  List<String> relatedRooles;
+  String relatedRooles;
 
-  Question({
+  Question(
     this.id,
     this.text,
     this.rightAnswerIndex,
     this.image,
     this.answers,
     this.relatedRooles,
-    this.rightAnswered,
-  });
-
-  factory Question.fromJson(Map<String, dynamic> json) => Question(
-      id: int.parse(json["id"]),
-      rightAnswerIndex: json["rightAnswerIndex"],
-      text: json["text"],
-      image: json["image"],
-      answers: json["answers"],
-      relatedRooles: json["relatedRooles"],
   );
+
+
+  factory Question.fromJson(Map<String, dynamic> json) {
+    var answersObjsJson = json['answers'] as List;
+    List<Answer> _answers = answersObjsJson.map((answerJson) => Answer.fromJson(answerJson)).toList();
+    return Question(
+      int.parse(json["id"]),
+      json["text"],
+      -1,
+      json["image"],
+      _answers,
+      json["relatedRooles"],
+    );
+  }
 
   Map<String, dynamic> toJson() =>
       {

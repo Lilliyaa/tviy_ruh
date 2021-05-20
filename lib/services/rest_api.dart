@@ -34,17 +34,20 @@ class APIManager{
     return lessonText;
   }
 
-  static Future<Test> getTest(int id) async{
-    Test test = new Test();
+  static Future<List<Test>> getTest(int id) async{
+    List<Test> test = [];
     var uri = Uri.http(Strings.baseUrl, 'api/load_lesson_test.php');
-    var response = await http.post(uri, body: {
+
+   var response = await http.post(uri, body: {
       "id": json.encode(id)
     });
     if(response.statusCode == 200) {
       var jsonData = jsonDecode(response.body.toString());
-      test = Test.fromJson(jsonData);
+      for (var u in jsonData) {
+        Test temp = Test.fromJson(u);
+        test.add(temp);
+      }
     }
     return test;
   }
-
 }

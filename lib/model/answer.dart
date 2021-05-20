@@ -1,7 +1,6 @@
 
 import 'dart:convert';
 
-import 'question.dart';
 
 Answer sightModelFromJson(String str) => Answer.fromJson(json.decode(str));
 
@@ -21,7 +20,7 @@ class Answer{
   });
 
   factory Answer.fromJson(Map<String, dynamic> json) => Answer(
-    right: json["right"],
+    right: int.parse(json["right"]) == 0? false : true,
     id: int.parse(json["id"]),
     text: json["text"],
   );
