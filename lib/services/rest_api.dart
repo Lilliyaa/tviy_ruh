@@ -2,6 +2,7 @@ import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/paragraph.dart';
 import 'package:flutter_apptest/model/test.dart';
 import 'package:flutter_apptest/model/exam.dart';
+import 'package:flutter_apptest/model/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -63,11 +64,29 @@ static Future<List<Exam>> selectExams(int student_id) async{
       for (var u in jsonData) {
         Exam exam = Exam.fromJson(u);
         exams.add(exam);
-        print(exam.toString());
+      //  print(exam.toString());
       }
     }
     return exams;
   }
+
+
+  static Future<List<Provider>> getProviderData() async{
+    List<Provider> providers = [];
+    var uri = Uri.http(Strings.baseUrl, 'api/load_provider.php');
+    var response = await http.get(uri);
+    if(response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body.toString());
+      for (var u in jsonData) {
+        var provider = Provider.fromJson(u);
+        providers.add(provider);
+        //print(provider.toString());
+      }
+    }
+    return providers;
+  }
+
   
   
+
 }
