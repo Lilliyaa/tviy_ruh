@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/rounded_input_field.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/round_btn.dart';
 import 'package:flutter/src/widgets/icon.dart';
@@ -29,7 +30,7 @@ class Body extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              RoundedInputField(
+          /*    RoundedInputField(
                 hintText: "Прізвище",
                 onChanged: (value){} ,
               ),
@@ -37,7 +38,7 @@ class Body extends StatelessWidget {
                 hintText: "Ім'я",
                   icon: Icons.accessibility,
                 onChanged: (value){} ,
-              ), RoundedInputField(
+              ),*/ RoundedInputField(
                 hintText: "Електронна адреса",
                 icon: Icons.alternate_email_rounded,
                 onChanged: (value){} ,
@@ -51,6 +52,7 @@ class Body extends StatelessWidget {
               RoundedButton(
                 text: "Зареєструватися",
                 press: (){
+                  //TO DO USUAL REGISTRATION
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -63,11 +65,19 @@ class Body extends StatelessWidget {
               ),
               SizedBox(height: size.height*0.01),
               OrDivider(),
+              ElevatedButton(
+                onPressed: signInWithGoogle,
+                child: Text("Google"),
+              ),
             ],
           ),
         )
       ),
     );
+  }
+
+  Future<void> signInWithGoogle() async {
+    await Authentification().signInWithGoogle();
   }
 }
 
