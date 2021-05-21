@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/rounded_input_field.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/round_btn.dart';
-import 'package:flutter/src/widgets/icon.dart';
+
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 import '../Nav.dart';
+import '../authentification.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   final Widget child;
 
   const Body({
@@ -14,60 +19,79 @@ class Body extends StatelessWidget {
   }) :super (key: key);
 
   @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body>{
+
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(),
-        appBar: MyCustomAppBar(
-          height: 100,
-        ),
-        body: Container(
-          //margin: EdgeInsets.symmetric(vertical: 100),
-          height: size.height,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              RoundedInputField(
-                hintText: "Прізвище",
-                onChanged: (value){} ,
-              ),
-              RoundedInputField(
-                hintText: "Ім'я",
-                  icon: Icons.accessibility,
-                onChanged: (value){} ,
-              ), RoundedInputField(
-                hintText: "Електронна адреса",
-                icon: Icons.alternate_email_rounded,
-                onChanged: (value){} ,
-              ),  RoundedInputField(
-                hintText: "Телефон",
-                icon: Icons.add_ic_call,
-                onChanged: (value){} ,
-              ),
-              RoundPassword(onChange: (value){},),
-              SizedBox(height: size.height*0.1),
-              RoundedButton(
-                text: "Зареєструватися",
-                press: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context){
-                            return Nav();
-                          }
-                      )
-                  );
-                },
-              ),
-              SizedBox(height: size.height*0.01),
-              OrDivider(),
-            ],
+          drawer: Drawer(),
+          appBar: MyCustomAppBar(
+            height: 100,
           ),
-        )
+          body: Container(
+            //margin: EdgeInsets.symmetric(vertical: 100),
+            height: size.height,
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RoundedInputField(
+                  hintText: "Прізвище",
+                  onChanged: (value){} ,
+                ),
+                RoundedInputField(
+                  hintText: "Ім'я",
+                  icon: Icons.accessibility,
+                  onChanged: (value){} ,
+                ), RoundedInputField(
+                  hintText: "Електронна адреса",
+                  icon: Icons.alternate_email_rounded,
+                  onChanged: (value){} ,
+                ),  RoundedInputField(
+                  hintText: "Телефон",
+                  icon: Icons.add_ic_call,
+                  onChanged: (value){} ,
+                ),
+                RoundPassword(onChange: (value){},),
+                RoundedButton(
+                  text: "Зареєструватися",
+                  press: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context){
+                              return Nav();
+                            }
+                        )
+                    );
+                  },
+                ),
+                SizedBox(height: size.height*0.01),
+                OrDivider(),
+                //Image.network("", height: 50, width: 50,),
+                ElevatedButton(onPressed: (){
+                  _logInGoogle();
+                },
+                    child: Text("with google")),
+                ElevatedButton(onPressed: (){
+                  _logInGoogle();
+                },
+                    child: Text("with facebook")),
+              ],
+            ),
+          )
       ),
     );
+  }
+
+  Future<void> _logInGoogle() async {
+    await Authentification().signInWithGoogl();
   }
 }
 
@@ -84,7 +108,6 @@ class OrDivider extends StatelessWidget{
                   height: 1.5,)
           ),
           Text("АБО",
-
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Color.fromRGBO(139, 103, 46, 1),
