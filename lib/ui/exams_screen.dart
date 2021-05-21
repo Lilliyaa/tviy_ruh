@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/model/exam.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
+import 'package:flutter_apptest/ui/test_screen.dart';
 
 class Exams extends StatelessWidget {
 
@@ -76,24 +77,39 @@ class ExamIco extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(_exam.id.toString()),
-      alignment: Alignment.center,
-      height: 45,
-      width: 55,
-      decoration: BoxDecoration(
-        color: getColor(),
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            spreadRadius: 2,
-            blurRadius: 2,
-            offset: Offset(0, 4),
+    return new GestureDetector(
+        onTap:(){_openTest(context, _exam.id);},
+    child: Container(
+          child: Text(_exam.id.toString()),
+          alignment: Alignment.center,
+          height: 45,
+          width: 55,
+          decoration: BoxDecoration(
+            color: getColor(),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                spreadRadius: 2,
+                blurRadius: 2,
+                offset: Offset(0, 4),
+              ),
+            ],
           ),
-        ],
-      ),
+    )
     );
+  }
+
+  _openTest(BuildContext context, int id) {
+    Navigator.push(
+       context,
+        MaterialPageRoute(
+            builder: (context){
+              return TestScreen(id, "exam");
+            }
+        )
+    );
+    print("Container clicked");
   }
 }
 //hello

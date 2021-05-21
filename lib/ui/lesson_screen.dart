@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apptest/assets/nav_icons.dart';
 import 'package:flutter_apptest/model/paragraph.dart';
 
-import 'lesson_test.dart';
+import 'test_screen.dart';
 import 'lesson_text.dart';
 import 'lesson_video.dart';
 
@@ -15,7 +15,7 @@ class LessonScreen extends StatefulWidget{
     _widgetOptions = <Widget>[
       LessonText(paragraph.id),
       LessonVideo(paragraph.video),
-      LessonTest(paragraph.id),
+      TestScreen(paragraph.id, "lesson"),
     ];
   }
 

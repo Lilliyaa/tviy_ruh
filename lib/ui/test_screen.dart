@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +8,18 @@ import 'package:flutter_apptest/model/question.dart';
 import 'package:flutter_apptest/model/test.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 
-class LessonTest extends StatefulWidget {
+class TestScreen extends StatefulWidget {
   int id;
+  String type;
 
-  LessonTest(this.id) {}
+  TestScreen(this.id, this.type) {}
 
   @override
-  _LessonTestState createState() => _LessonTestState();
+  _TestScreenState createState() => _TestScreenState();
 }
 
-class _LessonTestState extends State<LessonTest> {
+class _TestScreenState extends State<TestScreen> {
+  int _time;
   Future<List<Test>> _test;
   Test loadedTest;
   bool _buttonNextVisibility = false;
@@ -27,8 +30,11 @@ class _LessonTestState extends State<LessonTest> {
 
   @override
   void initState() {
-    _test = APIManager.getTest(widget.id);
-
+    if (widget.type == "exam") {
+      _test = APIManager.getExamTest(widget.id);
+    } else if (widget.type == "lesson") {
+      _test = APIManager.getLessonTest(widget.id);
+    }
     super.initState();
   }
 
@@ -53,12 +59,19 @@ class _LessonTestState extends State<LessonTest> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(widget.type == "exam" ? 50.0 : 0),
+            // here the desired height
+            child: AppBar(
+              title: Text("Екзамен"),
+            )),
         body: FutureBuilder<List<Test>>(
             future: _test,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 loadedTest = snapshot.data[0];
                 initProgress();
+                _time = loadedTest.questions.length * 60;
                 return Container(
                     color: Theme.of(context).primaryColor,
                     child: SingleChildScrollView(
@@ -84,12 +97,15 @@ class _LessonTestState extends State<LessonTest> {
                                 Row(
                                   children: [
                                     Text(
-                                      "3/10",
+                                      (_currentQuestion + 1).toString() +
+                                          "/" +
+                                          loadedTest.questions.length
+                                              .toString(),
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                     ),
                                     Text(
-                                      "02:26",
+                                      _time.toString(),
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                     )
@@ -114,9 +130,11 @@ class _LessonTestState extends State<LessonTest> {
                               child: Image.network("http://" +
                                   Strings.baseUrl +
                                   "/questions/" +
-                                  (loadedTest.questions[_currentQuestion].image !=
+                                  (loadedTest.questions[_currentQuestion]
+                                              .image !=
                                           null
-                                      ? loadedTest.questions[_currentQuestion].image
+                                      ? loadedTest
+                                          .questions[_currentQuestion].image
                                       : " "))),
                           CustomRadio(loadedTest.questions[_currentQuestion],
                               _updateProgress),
@@ -124,8 +142,8 @@ class _LessonTestState extends State<LessonTest> {
                               visible: _buttonNextVisibility &&
                                   (!loadedTest.questions[_currentQuestion]
                                       .rightAnswered),
-                              child: Text(loadedTest.questions[_currentQuestion]
-                                  .relatedRooles)),
+                              child: Text(loadedTest
+                                  .questions[_currentQuestion].relatedRooles)),
                           Visibility(
                             visible: _buttonNextVisibility,
                             child: ElevatedButton(
@@ -135,7 +153,7 @@ class _LessonTestState extends State<LessonTest> {
                                         .backgroundColor),
                                 child: Text(
                                     (_currentQuestion ==
-                                        loadedTest.questions.length - 1
+                                            loadedTest.questions.length - 1
                                         ? "Завершити тест"
                                         : "Наступне питання"),
                                     style: TextStyle(
@@ -150,27 +168,25 @@ class _LessonTestState extends State<LessonTest> {
                                       fontSize: 17,
                                     )),
                                 onPressed: () {
-                                  _currentQuestion == loadedTest.questions.length - 1
+                                  _currentQuestion ==
+                                          loadedTest.questions.length - 1
                                       ? _endTest()
                                       : _nextQuestion();
                                 }),
                           ),
                         ])));
+              } else {
+                return Center(child: CircularProgressIndicator());
               }
-              else{
-                return Center(
-                    child: CircularProgressIndicator()
-                );
-              }
-            }
-            )
-    );
+            }));
   }
+
+
 
   _endTest() async {
     int res = 0;
     for (var question in loadedTest.questions) {
-      if (question.rightAnswered) {
+      if (question.rightAnswered != null && question.rightAnswered) {
         res++;
       }
     }
@@ -339,6 +355,7 @@ class RadioItem extends StatelessWidget {
                   ),
                 ))),
             new Container(
+              width: 320,
               margin: new EdgeInsets.only(left: 10.0),
               child: new Text(_item.text,
                   style: new TextStyle(
