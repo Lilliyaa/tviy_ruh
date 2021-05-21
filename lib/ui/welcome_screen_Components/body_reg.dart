@@ -1,22 +1,39 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/rounded_input_field.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/round_btn.dart';
 import 'package:flutter/src/widgets/icon.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import '../Nav.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   final Widget child;
+  final Function(User) onSignIn;
 
   const Body({
     Key key,
-    @required this.child
+    @required this.child,
+    @required this.onSignIn
   }) :super (key: key);
 
   @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  static final FacebookLogin facebookSignIn = new FacebookLogin();
+  String _email;
+  String _password;
+  String _error = "";
+
+  @override
   Widget build(BuildContext context) {
+    initializeDateFormatting();
     Size size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         drawer: Drawer(),
@@ -38,29 +55,35 @@ class Body extends StatelessWidget {
                 hintText: "Ім'я",
                   icon: Icons.accessibility,
                 onChanged: (value){} ,
-              ),*/ RoundedInputField(
-                hintText: "Електронна адреса",
-                icon: Icons.alternate_email_rounded,
-                onChanged: (value){} ,
               ),  RoundedInputField(
                 hintText: "Телефон",
                 icon: Icons.add_ic_call,
                 onChanged: (value){} ,
+              ),*/
+              RoundedInputField(
+                hintText: "Електронна адреса",
+                icon: Icons.alternate_email_rounded,
+                onChanged: (value){
+                  _email = value;
+                } ,
               ),
-              RoundPassword(onChange: (value){},),
-              SizedBox(height: size.height*0.1),
+              RoundPassword(onChange: (value){
+                _password = value;
+              },),
+              SizedBox(height: 10),
+              Text(_error!=null? _error : "mmm"),
               RoundedButton(
                 text: "Зареєструватися",
                 press: (){
-                  //TO DO USUAL REGISTRATION
-                  Navigator.push(
+                  signInWithEmail();
+                  /*Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context){
                             return Nav();
                           }
                       )
-                  );
+                  );*/
                 },
               ),
               SizedBox(height: size.height*0.01),
@@ -68,6 +91,14 @@ class Body extends StatelessWidget {
               ElevatedButton(
                 onPressed: signInWithGoogle,
                 child: Text("Google"),
+              ),
+              ElevatedButton(
+                onPressed: signInAnonim,
+                child: Text("Anonim"),
+              ),
+              ElevatedButton(
+                onPressed: signInWithFacebook,
+                child: Text("Facebook"),
               ),
             ],
           ),
@@ -79,6 +110,55 @@ class Body extends StatelessWidget {
   Future<void> signInWithGoogle() async {
     await Authentification().signInWithGoogle();
   }
+
+  Future<void> signInAnonim() async {
+    UserCredential userCredential = await FirebaseAuth.instance.signInAnonymously();
+    widget.onSignIn(userCredential.user);
+  }
+
+  Future<void> signInWithEmail() async {
+    try {
+      if (true) {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: _email, password: _password);
+        widget.onSignIn(userCredential.user);
+      }
+    } on Exception catch(e){
+      setState(() {
+        _error = e.toString();
+      });
+    }
+  }
+
+  Future<void> signInWithFacebook() async {
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+      final FacebookLoginResult result =
+      await facebookSignIn.logIn(['email']);
+
+      switch (result.status) {
+        case FacebookLoginStatus.loggedIn:
+          final FacebookAccessToken accessToken = result.accessToken;
+          print('''
+         Logged in!
+         
+         Token: ${accessToken.token}
+         User id: ${accessToken.userId}
+         Expires: ${accessToken.expires}
+         Permissions: ${accessToken.permissions}
+         Declined permissions: ${accessToken.declinedPermissions}
+         ''');
+
+          break;
+        case FacebookLoginStatus.cancelledByUser:
+          print('Login cancelled by the user.');
+          break;
+        case FacebookLoginStatus.error:
+          print('Something went wrong with the login process.\n'
+              'Here\'s the error Facebook gave us: ${result.errorMessage}');
+          break;
+      }
+  }
+
 }
 
 class OrDivider extends StatelessWidget{
@@ -94,7 +174,6 @@ class OrDivider extends StatelessWidget{
                   height: 1.5,)
           ),
           Text("АБО",
-
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Color.fromRGBO(139, 103, 46, 1),
@@ -141,24 +220,3 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(height);
 }
-/*
- @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 100),
-      height: size.height,
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("Швидка реєстрація",
-            style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Roboto', fontSize: 20 ),
-          ),
-                  ],
-      ),
-    );
-  }
-*
-*
-* */

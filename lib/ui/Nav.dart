@@ -9,7 +9,7 @@ import 'package:flutter_apptest/theme.dart';
 import 'home_screen.dart';
 import 'lessons_screen.dart';
 import 'map_screen.dart';
-import 'welcome_screen_Components/logOut_screen.dart';
+import 'logOut_screen.dart';
 
 class Nav extends StatefulWidget{
   @override

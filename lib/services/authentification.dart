@@ -30,4 +30,9 @@ class Authentification{
     await googleSignIn.signOut();
     await _firebaseAuth.signOut();
   }
+
+  Future<void> signInAnonim() async
+  {
+    UserCredential userCredential = await FirebaseAuth.instance.signInAnonymously();
+  }
 }

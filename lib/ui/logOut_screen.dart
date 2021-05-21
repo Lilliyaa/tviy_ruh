@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apptest/services/authentification.dart';
 
 class LogOut extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
