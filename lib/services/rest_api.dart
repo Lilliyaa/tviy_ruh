@@ -35,8 +35,24 @@ class APIManager{
     }
     return lessonText;
   }
+
+  static Future<List<Test>> getExamTest(int id) async{
+    List<Test> test = [];
+    var uri = Uri.http(Strings.baseUrl, 'api/load_exam_test.php');
+    var response = await http.post(uri, body: {
+      "id": json.encode(id)
+    });
+    if(response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body.toString());
+      for (var u in jsonData) {
+        Test temp = Test.fromJson(u);
+        test.add(temp);
+      }
+    }
+    return test;
+  }
   
-  static Future<List<Test>> getTest(int id) async{
+  static Future<List<Test>> getLessonTest(int id) async{
     List<Test> test = [];
     var uri = Uri.http(Strings.baseUrl, 'api/load_lesson_test.php');
 
@@ -64,7 +80,6 @@ static Future<List<Exam>> selectExams(int student_id) async{
       for (var u in jsonData) {
         Exam exam = Exam.fromJson(u);
         exams.add(exam);
-      //  print(exam.toString());
       }
     }
     return exams;
@@ -80,7 +95,6 @@ static Future<List<Exam>> selectExams(int student_id) async{
       for (var u in jsonData) {
         var provider = Provider.fromJson(u);
         providers.add(provider);
-        //print(provider.toString());
       }
     }
     return providers;
