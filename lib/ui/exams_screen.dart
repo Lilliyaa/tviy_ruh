@@ -12,7 +12,6 @@ class Exams extends StatelessWidget {
     return Container(
       //color: Colors.black12,
       child: ListView(
-        //physics: BouncingScrollPhysics(),
         children: [
           Container(
             alignment: Alignment.topCenter,
@@ -56,19 +55,20 @@ class ExamIco extends StatelessWidget {
   //const ExamIco({Key key}) : super(key: key);
 
   final Exam _exam;
- const ExamIco(this._exam) : super();
 
-  Color getColor(){
+  const ExamIco(this._exam) : super();
+
+  Color getColor() {
     Color color;
-    if(_exam.rightAnswers == "null"){
+    if (_exam.rightAnswers == "null") {
       color = Colors.white;
     }
-    else{
-      int ra = int.parse(_exam.rightAnswers);
-      if(ra < 90){
+    else {
+      int rating = int.parse(_exam.rightAnswers);
+      if (rating < 90) {
         color = Color.fromRGBO(253, 255, 130, 1);
       }
-      else{
+      else {
         color = Color.fromRGBO(177, 223, 165, 1);
       }
     }
@@ -78,8 +78,10 @@ class ExamIco extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-        onTap:(){_openTest(context, _exam.id);},
-    child: Container(
+        onTap: () {
+          _openTest(context, _exam.id);
+        },
+        child: Container(
           child: Text(_exam.id.toString()),
           alignment: Alignment.center,
           height: 45,
@@ -96,15 +98,15 @@ class ExamIco extends StatelessWidget {
               ),
             ],
           ),
-    )
+        )
     );
   }
 
   _openTest(BuildContext context, int id) {
     Navigator.push(
-       context,
+        context,
         MaterialPageRoute(
-            builder: (context){
+            builder: (context) {
               return TestScreen(id, "exam");
             }
         )
