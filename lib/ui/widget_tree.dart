@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_apptest/ui/welcome_screen_Components/body_reg.dart';
+import 'package:flutter_apptest/ui/welcome_screen_Components/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../theme.dart';
 import 'Nav.dart';
-import 'welcome_screen.dart';
 
 class WidgetTree extends StatefulWidget {
   @override
@@ -37,7 +36,7 @@ class _WidgetTreeState extends State<WidgetTree> {
           debugShowCheckedModeBanner: false,
           //добавлено. Не знаю, что это значит
           theme: myLightTheme,
-          home: Body(
+          home: WelcomeScreen(
             onSignIn: (userCred) => onRefresh(userCred),
           ));
     }

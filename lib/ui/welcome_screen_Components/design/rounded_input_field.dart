@@ -26,16 +26,17 @@ class RoundedInputField extends StatelessWidget {
 }
 
 class RoundPassword extends StatelessWidget {
-  final ValueChanged<String> onChange;
+  final ValueChanged<String> onChanged;
   const RoundPassword({
     Key key,
-    this.onChange
+    this.onChanged
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
+        onChanged: onChanged,
         obscureText: true,
         decoration: InputDecoration(
           hintText: "Пароль",

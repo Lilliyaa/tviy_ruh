@@ -5,7 +5,12 @@ ThemeData myLightTheme = ThemeData(
     bottomAppBarColor: Color(0xff4b4a4a),
 
     textTheme: TextTheme(
+
       headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+
+      //for welcomeScreen
+      headline4: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+
       headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
 
       bodyText1: TextStyle(fontSize: 16.0, fontFamily: 'Roboto', color: Color(0xff4b4a4a)
