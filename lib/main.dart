@@ -9,9 +9,13 @@ void main(){
 }
 
 class MyApp extends StatelessWidget {
+  
+  MyApp(){}
+  
   @override
   Widget build(BuildContext context){
     return MaterialApp(
+      
       debugShowCheckedModeBanner: false, //добавлено. Не знаю, что это значит
       theme: myLightTheme,
       title: "Добро пожаловать в \"Твій рух\"",

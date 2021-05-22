@@ -3,6 +3,8 @@ import 'package:flutter_apptest/ui/welcome_screen_Components/rounded_input_field
 import 'package:flutter_apptest/ui/welcome_screen_Components/round_btn.dart';
 import 'package:flutter/src/widgets/icon.dart';
 
+import '../Nav.dart';
+
 class Body extends StatelessWidget {
   final Widget child;
 
@@ -49,7 +51,15 @@ class Body extends StatelessWidget {
                 // SizedBox(height: size.height*0.1),
                 RoundedButton(
                   text: "Зареєструватися",
-                  press: (){},
+                  press: (){Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context){
+                            return Nav();
+                          }
+                      )
+                  );
+                  },
                 ),
                 // SizedBox(height: size.height*0.01),
                 OrDivider(),
