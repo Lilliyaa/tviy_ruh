@@ -9,6 +9,7 @@ import 'home_screen.dart';
 import 'lessons_screen.dart';
 import 'map_screen.dart';
 import 'logOut_screen.dart';
+import 'more_screen.dart';
 
 class Nav extends StatefulWidget{
   @override
@@ -24,7 +25,7 @@ class _NavState extends State<Nav>{
     myMap(),
     Exams(),
     Lessons(),
-    LogOut(),
+    More(),
   ];
   List<String> _screen_names = <String>[
     "Пошук",
