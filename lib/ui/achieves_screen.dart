@@ -6,62 +6,73 @@ import 'package:flutter_apptest/services/rest_api.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Achieves extends StatelessWidget {
-
   final Future<List<Achieve>> _achieves = APIManager.selectAchieves(1);
+
+  int countOpen(value) {
+    int res = 0;
+    for (var achieve in value) {
+      if (achieve.progress == 100) {
+        res++;
+      }
+    }
+    return res;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       //color: Colors.black12,
-      child: ListView(
-        children: [
-          Container(
-              alignment: Alignment.topCenter,
-              margin: EdgeInsets.only(top: 20),
-              child: Image.asset("assets/images/Ach_embl.png")
-          ),
-          Container(
-            alignment: Alignment.topCenter,
-            margin: EdgeInsets.only(bottom: 20),
-            child: Text(
-              "Відкрито 1 з 20 нагород",
-              style: TextStyle(
-                color: Color.fromRGBO(122, 120, 120, 1),
-                fontStyle: FontStyle.italic,
-                fontSize: 18,
-              ),
-            ),
-          ),
-          Container(
-            color: Colors.black12,
-            margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
-            alignment: Alignment.topCenter,
-            child: FutureBuilder(
-              future: _achieves,
-              builder: (context, snapshot){
-                if(snapshot.hasData){
-                  List<Achieve> nAchieves = snapshot.data ?? [];
-                  return Align(
-                    alignment: Alignment.topLeft,
-                    child: Wrap(
-                      spacing: 10,
-                      runSpacing: 20,
-                      children: nAchieves.map((e) => AchieveIco(e)).toList(),
+      child: FutureBuilder(
+          future: _achieves,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Achieve> nAchieves = snapshot.data ?? [];
+              return ListView(
+                children: [
+                  Container(
+                      alignment: Alignment.topCenter,
+                      margin: EdgeInsets.only(top: 20),
+                      child: Image.asset("assets/images/Ach_embl.png")
+                  ),
+                  Container(
+                    alignment: Alignment.topCenter,
+                    margin: EdgeInsets.only(bottom: 20),
+                    child: Text(
+                      "Відкрито ${countOpen(nAchieves)} з ${nAchieves.length} нагород",
+                      style: TextStyle(
+                        color: Color.fromRGBO(122, 120, 120, 1),
+                        fontStyle: FontStyle.italic,
+                        fontSize: 18,
+                      ),
                     ),
-                  );
-                }else{
-                  return Center(
-                      child: CircularProgressIndicator()
-                  );
-                }
-              },
-            ),
-          ),
-        ],
+                  ),
+                  Container(
+                    //color: Colors.black12,
+                      margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                      alignment: Alignment.topCenter,
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Wrap(
+                          spacing: 15,
+                          runSpacing: 10,
+                          children: nAchieves.map((e) => AchieveIco(e)).toList(),
+                        ),
+                      )
+                  ),
+                ],
+              );
+            }
+            else {
+              return Center(
+                  child: CircularProgressIndicator()
+              );
+            }
+          }
       ),
     );
   }
 }
+
 class AchieveIco extends StatelessWidget {
   //const AchieveIco({Key key}) : super(key: key);
 
@@ -120,10 +131,14 @@ class AchieveIco extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var colorTheme = getColors(_achieve.color);
+    String iconPath = "empty.png";
+    if(_achieve.progress == 100){
+      iconPath = _achieve.icon;
+    }
     return Container(
-      child: SvgPicture.network(
-        Strings.baseUrl + "/achieves/" + _achieve.icon,
-        color: colorTheme['icon'],
+      child: Image.network(
+        "http://" + Strings.baseUrl + "/achieves/" + iconPath,
+        //color: colorTheme['icon'],
       ),
       alignment: Alignment.center,
       height: 67,

@@ -5,6 +5,7 @@ class Achieve {
   int requirements;
   String icon;
   String color;
+  int progress;
 
   Achieve({
     this.achievement_id,
@@ -12,7 +13,8 @@ class Achieve {
     this.identifier,
     this.requirements,
     this.icon,
-    this.color
+    this.color,
+    this.progress
   });
 
   factory Achieve.fromJson(Map<String, dynamic> json) => Achieve(
@@ -22,7 +24,8 @@ class Achieve {
     requirements: int.parse(json["requirements"]),
     icon: json["icon"],
     color: json["color"],
+    progress: int.parse(json["progress"]),
   );
 
-  String toString() => "id: $achievement_id, name: $name";
+  String toString() => "id: $achievement_id, name: $name, progress: $progress";
 }
