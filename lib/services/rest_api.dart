@@ -117,6 +117,5 @@ static Future<List<Exam>> selectExams(int student_id) async{
     }
     return achieves;
   }
-  
 
 }
