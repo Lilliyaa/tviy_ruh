@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apptest/assets/nav_icons.dart';
 import 'package:flutter_apptest/ui/welcome_screen.dart';
 import 'package:flutter_apptest/ui/exams_screen.dart';
-import 'package:flutter_svg/svg.dart';
-
-import 'package:flutter_apptest/theme.dart';
-
+import 'package:flutter_apptest/ui/statistic_screen.dart';
 import 'home_screen.dart';
 import 'lessons_screen.dart';
+import 'package:flutter_apptest/ui/statistic_screen.dart';
+
 import 'map_screen.dart';
 
 class Nav extends StatefulWidget{
@@ -21,11 +20,10 @@ class _NavState extends State<Nav>{
    // Вот сюда вписіваем странички, которіе будут открываться в навигации, вместо Text("ololo")
   List<Widget> _widgetOptions = <Widget>[
     Home(),
-    myMap(),
     Exams(),
     Lessons(),
+    Statistic(),
     Text('Profile'),
-    WelcomeScreen(),
   ];
   List<String> _screen_names = <String>[
     "Пошук",
