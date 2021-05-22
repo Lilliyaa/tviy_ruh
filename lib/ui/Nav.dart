@@ -3,7 +3,7 @@ import 'package:flutter_apptest/assets/nav_icons.dart';
 import 'package:flutter_apptest/ui/welcome_screen.dart';
 import 'package:flutter_apptest/ui/exams_screen.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:flutter_apptest/ui/more_screen.dart';
 import 'package:flutter_apptest/theme.dart';
 
 import 'home_screen.dart';
@@ -24,7 +24,8 @@ class _NavState extends State<Nav>{
     myMap(),
     Exams(),
     Lessons(),
-    Text('Profile'),
+    More(),
+    //Text('Profile'),
     WelcomeScreen(),
   ];
   List<String> _screen_names = <String>[
