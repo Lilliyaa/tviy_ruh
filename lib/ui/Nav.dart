@@ -23,7 +23,7 @@ class _NavState extends State<Nav>{
   List<Widget> _widgetOptions = <Widget>[
     Home(),
     myMap(),
-    Achieves(),
+    Exams(),
     Lessons(),
    // LogOut(),
     More(),

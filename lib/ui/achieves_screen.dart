@@ -20,54 +20,64 @@ class Achieves extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //color: Colors.black12,
-      child: FutureBuilder(
-          future: _achieves,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              List<Achieve> nAchieves = snapshot.data ?? [];
-              return ListView(
-                children: [
-                  Container(
+    return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Ачівки",
+          style: Theme.of(context).appBarTheme.titleTextStyle,
+        ),
+      ),
+      body: Container(
+        //color: Colors.black12,
+        child: FutureBuilder(
+            future: _achieves,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                List<Achieve> nAchieves = snapshot.data ?? [];
+                return ListView(
+                  children: [
+                    Container(
+                        alignment: Alignment.topCenter,
+                        margin: EdgeInsets.only(top: 20),
+                        child: Image.asset("assets/images/Ach_embl.png")
+                    ),
+                    Container(
                       alignment: Alignment.topCenter,
-                      margin: EdgeInsets.only(top: 20),
-                      child: Image.asset("assets/images/Ach_embl.png")
-                  ),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: Text(
-                      "Відкрито ${countOpen(nAchieves)} з ${nAchieves.length} нагород",
-                      style: TextStyle(
-                        color: Color.fromRGBO(122, 120, 120, 1),
-                        fontStyle: FontStyle.italic,
-                        fontSize: 18,
+                      margin: EdgeInsets.only(bottom: 20),
+                      child: Text(
+                        "Відкрито ${countOpen(nAchieves)} з ${nAchieves.length} нагород",
+                        style: TextStyle(
+                          color: Color.fromRGBO(122, 120, 120, 1),
+                          fontStyle: FontStyle.italic,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    //color: Colors.black12,
-                      margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
-                      alignment: Alignment.topCenter,
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Wrap(
-                          spacing: 15,
-                          runSpacing: 10,
-                          children: nAchieves.map((e) => AchieveIco(e)).toList(),
-                        ),
-                      )
-                  ),
-                ],
-              );
+                    Container(
+                      //color: Colors.black12,
+                        margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                        alignment: Alignment.topCenter,
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Wrap(
+                            spacing: 15,
+                            runSpacing: 10,
+                            children: nAchieves.map((e) => AchieveIco(e)).toList(),
+                          ),
+                        )
+                    ),
+                  ],
+                );
+              }
+              else {
+                return Center(
+                    child: CircularProgressIndicator()
+                );
+              }
             }
-            else {
-              return Center(
-                  child: CircularProgressIndicator()
-              );
-            }
-          }
+        ),
       ),
     );
   }
@@ -155,4 +165,3 @@ class AchieveIco extends StatelessWidget {
     );
   }
 }
-
