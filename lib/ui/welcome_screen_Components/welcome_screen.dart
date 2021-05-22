@@ -88,9 +88,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               CupertinoDialogAction(
                 isDefaultAction: true,
                 child: Text("Школа",
-                style: Theme.of(context).textTheme.bodyText1,),
+                  style: Theme.of(context).textTheme.bodyText1,),
                 onPressed: () {
-                 /* Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  /* Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return Registration();
                   }));*/
                 },
@@ -111,6 +111,3 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   }
 }
-
-
-

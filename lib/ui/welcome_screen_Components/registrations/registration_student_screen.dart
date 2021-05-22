@@ -154,7 +154,7 @@ class _RegistrationStudentState extends State<RegistrationStudent> {
                               },
                               padding: EdgeInsets.all(0.0),
                               child:
-                                  Image.asset('assets/images/facebook.png'))),
+                              Image.asset('assets/images/facebook.png'))),
                     ),
                   ],
                 ),
@@ -168,7 +168,7 @@ class _RegistrationStudentState extends State<RegistrationStudent> {
 
   Future<void> createUserWithEmail() async {
     List response =
-        await Authentification().createUserWithEmail(_email, _password);
+    await Authentification().createUserWithEmail(_email, _password);
     User user = response[0];
     if (user != null) {
       APIManager.addUserStudent(_name, _surname, _email);
@@ -240,7 +240,7 @@ class _RegistrationStudentState extends State<RegistrationStudent> {
         _error = "Введіть прізвище";
       });
       return false;
-    } 
+    }
     return true;
   }
 
@@ -255,9 +255,9 @@ class _RegistrationStudentState extends State<RegistrationStudent> {
   }
 
 
-    Future<void> createUserWithFacebook() async {
-      await Authentification().signInWithFacebook();
-    }
+  Future<void> createUserWithFacebook() async {
+    await Authentification().signInWithFacebook();
+  }
 
 
 }

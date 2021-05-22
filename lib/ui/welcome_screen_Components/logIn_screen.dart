@@ -56,23 +56,23 @@ class _LogInState extends State<LogIn> {
               RoundPassword(
                 text: "Пароль",
                 onChanged: (value){
-                setState(() {
-                  _password = value;
-                });
-              },),
+                  setState(() {
+                    _password = value;
+                  });
+                },),
               SizedBox(height: 10),
               Container(
                 margin: EdgeInsets.only(bottom: 20),
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child:Text(
-                  (_error!=null? _error : "Заповніть поля"),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.redAccent,
-                    fontFamily: "Roboto",
-                    fontSize: 16,
-                    shadows: [],
-                  )),
+                    (_error!=null? _error : "Заповніть поля"),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.redAccent,
+                      fontFamily: "Roboto",
+                      fontSize: 16,
+                      shadows: [],
+                    )),
               ),
               RoundedButton(
                 text: "Увійти",
@@ -84,29 +84,29 @@ class _LogInState extends State<LogIn> {
               OrDivider(),
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                Container(
-                  child: SizedBox(
-                      height: 70,
-                      width: 70,
-                      child: FlatButton(
-                          onPressed: signInWithGoogle,
-                          padding: EdgeInsets.all(0.0),
-                          child: Image.asset('assets/images/google.png'))),
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 50,
-                ),
-                Container(
-                  child: SizedBox(
-                      height: 80,
-                      width: 80,
-                      child: FlatButton(
-                          onPressed: signInWithFacebook,
-                          padding: EdgeInsets.all(0.0),
-                          child: Image.asset('assets/images/facebook.png'))),
-                ),
-              ],),
+                  Container(
+                    child: SizedBox(
+                        height: 70,
+                        width: 70,
+                        child: FlatButton(
+                            onPressed: signInWithGoogle,
+                            padding: EdgeInsets.all(0.0),
+                            child: Image.asset('assets/images/google.png'))),
+                  ),
+                  SizedBox(
+                    height: 50,
+                    width: 50,
+                  ),
+                  Container(
+                    child: SizedBox(
+                        height: 80,
+                        width: 80,
+                        child: FlatButton(
+                            onPressed: signInWithFacebook,
+                            padding: EdgeInsets.all(0.0),
+                            child: Image.asset('assets/images/facebook.png'))),
+                  ),
+                ],),
             ],
           ),
         )
@@ -151,5 +151,3 @@ class _LogInState extends State<LogIn> {
   }
 
 }
-
-
