@@ -3,6 +3,9 @@ import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/rounded_input_field.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/round_btn.dart';
 import 'package:flutter/src/widgets/icon.dart';
+import 'package:flutter_apptest/ui/statistic_screen.dart';
+
+
 
 import 'Nav.dart';
 
@@ -80,7 +83,14 @@ class More extends StatelessWidget {
                   ),
                   icon: Icon(Icons.bar_chart_sharp,color: Color.fromRGBO(254, 187, 87, 1)),
                   onPressed: () {
-
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context){
+                              return Statistic();
+                            }
+                        )
+                    );
                   },
                 )
             ),

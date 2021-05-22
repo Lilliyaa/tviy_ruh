@@ -1,95 +1,156 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_apptest/assets/nav_icons.dart';
-import 'package:flutter_apptest/ui/welcome_screen.dart';
-import 'package:flutter_apptest/ui/exams_screen.dart';
-import 'package:flutter_svg/svg.dart';
-//import 'package:flutter_apptest/ui/more_screen.dart';
 import 'package:flutter_apptest/theme.dart';
+import '../theme.dart';
+import 'package:flutter_apptest/assets/statistic_icons.dart';
+import 'dart:async';
+import 'package:flutter_share/flutter_share.dart';
 
-import 'home_screen.dart';
-import 'lessons_screen.dart';
-import 'map_screen.dart';
+class StatisticData{
+  String allLessons;
+  String allExams;
+  String allAchivment;
 
-class Nav extends StatefulWidget{
-  @override
-  _NavState createState() => _NavState();
+  String realLessons;
+  String realExams;
+  String realAchivment;
+
+  String persentLessons;
+  String persentExams;
+  String persentAchivment;
+
+  String getPercent(String a, String b){
+    String res;
+    var resInt = int.parse(b)/int.parse(a)*100;
+    res = resInt.toString();
+    return res;
+  }
 }
 
-class _NavState extends State<Nav>{
-  int _selectedIndex = 0;
-  String text = "bar";
-  // Вот сюда вписіваем странички, которіе будут открываться в навигации, вместо Text("ololo")
-  List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    myMap(),
-    Exams(),
-    Lessons(),
-    //More(),
-    //Text('Profile'),
-    WelcomeScreen(),
-  ];
-  List<String> _screen_names = <String>[
-    "Пошук",
-    "Розпізнавання знаку",
-    "Екзаменаційні білети",
-    "Заняття",
-    "Додатково",
-    "Реєстрація"
-  ];
+StatisticData _data = new StatisticData();
 
-  void _onItemTap(int index){
-    setState(() {
-      _selectedIndex = index;
-      text = _screen_names[index];
-    });
+
+class Statistic extends StatefulWidget {
+  Statistic()
+  {
+    _data.allLessons = "60";
+    _data.allExams = "40";
+    _data.allAchivment = "20";
+
+    _data.realLessons = "10";
+    _data.realExams = "1";
+    _data.realAchivment = "5";
+
+    _data.persentLessons = "20";
+    _data.persentExams = "1";
+    _data.persentAchivment= "10";
+    print(_data.allLessons);
   }
-  @override Widget build (BuildContext context){
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          text,
-          style: Theme.of(context).appBarTheme.titleTextStyle,
-        ),
-        //backgroundColor: Color(0xfffebb57),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-            icon: Icon(NavIcons.nav_car,),
-            title: Text('')
-        ),
-        BottomNavigationBarItem(
-            icon: Icon(NavIcons.nav_sign,),
-            title: Text('')
-        ),
-        BottomNavigationBarItem(
-            icon: Icon(NavIcons.nav_test,),
-            title: Text('')
-        ),
-        BottomNavigationBarItem(
-            icon: Icon(NavIcons.nav_study,),
-            title: Text('')
-        ),
-        BottomNavigationBarItem(
-            icon: Icon(NavIcons.nav_more,
+  @override
+  _StatisticState createState() => _StatisticState();
+}
+
+class _StatisticState extends State<Statistic> {
+
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: myLightTheme.primaryColor,
+    body: ListView(
+      padding: EdgeInsets.all(16),
+      children: [
+        buildRoundedCard(context, StatisticIcons.lessons, "Заняття", "Усього пройдено уроків:", _data.allLessons,  _data.realLessons, _data.persentLessons),
+        buildRoundedCard(context,StatisticIcons.exams, "Екзамени", "Пройдено білетів:", _data.allExams,_data.realExams, _data.persentExams),
+        buildRoundedCard(context,StatisticIcons.achievment, "Ачівки", "Зароблено ачівок:" , _data.allAchivment, _data.realAchivment,_data.persentAchivment),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(
+              icon: const Icon(StatisticIcons.share),
+              onPressed: () {
+                String results = "Агов, тільки подивись на мої результати!\n - тем вивчено: ${_data.allLessons},\n - тестів пройдено: ${_data.realExams},\n - винагород отримано: ${_data.realAchivment}!\n\n Ти також можеш вивчати ПДД разом із \"Твій рух\"";
+                shareFile(results, "Мої результати!");
+              },
             ),
-            title: Text('')
-        ),
+          ],
+        )
       ],
-        showSelectedLabels: false,
-        //backgroundColor: Colors.red,
+    ),
+  );
+}
 
-        // selectedItemColor: Colors.red,
-        showUnselectedLabels: false,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTap,
+Future<void> shareFile(dynamic link, String title) async {
+  await FlutterShare.share(
+    title: "Мої результати",
+    text: title,
+    linkUrl: link,
+    chooserTitle: "Поділіться резульататами!"
+  );
+}
+
+Widget buildRoundedCard(
+    BuildContext context,
+    IconData icon,
+    String ttl,
+    String txt,
+    String all,
+    String real,
+    String percent)
+{
+  return Card(
+      shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+  ),
+    child: Container(
+      height: 200,
+      child: Padding(
+        padding: EdgeInsets.only(left: 16, right: 16 ),
+        child: Column
+          (//crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(icon),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                    Text(ttl,
+                    style:
+                  Theme.of(context).textTheme.headline2),
+                ],
+              ),
+              SizedBox(width: 50,)
+            ],
+          ),
+          Divider(
+            color: Color.fromRGBO(143, 141, 141, 1),
+            height: 20,
+            thickness: 2,
+            indent: 10,
+            endIndent: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(txt,
+                style: Theme.of(context).textTheme.headline3),
+              Text(real+"/"+all,
+                style: Theme.of(context).textTheme.headline3),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Середній результат: "+percent+"%",
+                style: Theme.of(context).textTheme.headline3),
+            ],
+          ),
+        ],
       ),
-
-    );
-  }
+      ),
+    ),
+  );
 }
