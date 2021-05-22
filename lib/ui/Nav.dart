@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/assets/nav_icons.dart';
+import 'package:flutter_apptest/ui/achieves_screen.dart';
 import 'package:flutter_apptest/ui/welcome_screen.dart';
 import 'package:flutter_apptest/ui/exams_screen.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:flutter_apptest/ui/more_screen.dart';
 import 'package:flutter_apptest/theme.dart';
 
 import 'home_screen.dart';
@@ -18,15 +19,16 @@ class Nav extends StatefulWidget{
 
 class _NavState extends State<Nav>{
   int _selectedIndex = 0;
-   String text = "bar";
-   // Вот сюда вписіваем странички, которіе будут открываться в навигации, вместо Text("ololo")
+  String text = "bar";
+  // Вот сюда вписіваем странички, которіе будут открываться в навигации, вместо Text("ololo")
   List<Widget> _widgetOptions = <Widget>[
     Home(),
     myMap(),
-    Exams(),
+    Achieves(),
     Lessons(),
-    LogOut(),
-    WelcomeScreen(),
+   // LogOut(),
+    More(),
+    //Text('Profile'),
   ];
   List<String> _screen_names = <String>[
     "Пошук",
@@ -34,7 +36,6 @@ class _NavState extends State<Nav>{
     "Екзаменаційні білети",
     "Заняття",
     "Додатково",
-    "Реєстрація"
   ];
 
   void _onItemTap(int index){

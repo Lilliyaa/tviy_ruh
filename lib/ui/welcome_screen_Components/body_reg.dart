@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/rounded_input_field.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/round_btn.dart';
+import 'package:flutter_apptest/ui/Nav.dart';
 import 'package:flutter/src/widgets/icon.dart';
-
-import '../Nav.dart';
 
 class Body extends StatelessWidget {
   final Widget child;
@@ -16,13 +15,12 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    //Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(),
-        appBar: MyCustomAppBar(
-          height: 100,
-        ),
+      appBar: AppBar(
+            title: Text("Реєстрація"),
+          ),
         body: Container(
           //margin: EdgeInsets.symmetric(vertical: 100),
           height: size.height,
@@ -68,10 +66,10 @@ class Body extends StatelessWidget {
               ElevatedButton(
                 onPressed: signInWithGoogle,
                 child: Text("Google"),
-              ),
-            ],
-          ),
-        )
+              ),         
+              ],
+            ),
+          )
       ),
     );
   }
@@ -86,26 +84,26 @@ class OrDivider extends StatelessWidget{
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      width: size.width*0.8,
-      child: Row(
-        children: <Widget>[
-          Expanded(child:
-          Divider(color: Color.fromRGBO(139, 103, 46, 1),
-                  height: 1.5,)
-          ),
-          Text("АБО",
+        width: size.width*0.8,
+        child: Row(
+          children: <Widget>[
+            Expanded(child:
+            Divider(color: Color.fromRGBO(139, 103, 46, 1),
+              height: 1.5,)
+            ),
+            Text("АБО",
 
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(139, 103, 46, 1),
-            fontWeight: FontWeight.w600,
-          ),),
-          Expanded(child:
-          Divider(color: Color.fromRGBO(139, 103, 46, 1),
-            height: 1.5,)
-          ),
-        ],
-      )
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color.fromRGBO(139, 103, 46, 1),
+                fontWeight: FontWeight.w600,
+              ),),
+            Expanded(child:
+            Divider(color: Color.fromRGBO(139, 103, 46, 1),
+              height: 1.5,)
+            ),
+          ],
+        )
     );
   }
 }
@@ -129,8 +127,8 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Padding(
             padding: EdgeInsets.all(5),
             child: Text("Швидка реєстрація",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Roboto', fontSize: 20 ),
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Roboto', fontSize: 20 ),
             ),
           ),
         ),
@@ -141,24 +139,3 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(height);
 }
-/*
- @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 100),
-      height: size.height,
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("Швидка реєстрація",
-            style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Roboto', fontSize: 20 ),
-          ),
-                  ],
-      ),
-    );
-  }
-*
-*
-* */
