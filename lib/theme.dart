@@ -51,4 +51,6 @@ ThemeData myLightTheme = ThemeData(
       selectedItemColor: Colors.white,
       backgroundColor: Color(0xff4b4a4a),
       type: BottomNavigationBarType.fixed,
-    ));
+    )
+);
+

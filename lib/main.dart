@@ -13,10 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //добавлено. Не знаю, что это значит
       theme: myLightTheme,
-      title: "Добро пожаловать в \"Твій рух\"",
-      //title: "Bottom Nav Bar",
-      //home: Nav(),
-      home: WelcomeScreen(),
+      //title: "Добро пожаловать в \"Твій рух\"",
+      //home: WelcomeScreen(),
+
+      title: "Bottom Nav Bar",
+      home: Nav(),
     );
   }
 }
