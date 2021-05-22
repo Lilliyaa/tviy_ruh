@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_apptest"
+    package="com.prp.flutter_apptest"
     >
     <uses-permission android:name="android.permission.INTERNET" />
    <application

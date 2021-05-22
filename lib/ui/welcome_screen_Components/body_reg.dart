@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/rounded_input_field.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/round_btn.dart';
 import 'package:flutter_apptest/ui/Nav.dart';
@@ -17,57 +18,64 @@ class Body extends StatelessWidget {
     //Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-          drawer: Drawer(),
-          appBar: MyCustomAppBar(
-            height: 100,
+      appBar: AppBar(
+            title: Text("Реєстрація"),
           ),
-          body: Container(
-            //margin: EdgeInsets.symmetric(vertical: 100),
-            //height: size.height,
-            width: double.infinity,
-            child: ListView (
-              //mainAxisAlignment: MainAxisAlignment.center,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              children: <Widget>[
-                RoundedInputField(
-                  hintText: "Прізвище",
-                  onChanged: (value){} ,
-                ),
-                RoundedInputField(
-                  hintText: "Ім'я",
+        body: Container(
+          //margin: EdgeInsets.symmetric(vertical: 100),
+          height: size.height,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+          /*    RoundedInputField(
+                hintText: "Прізвище",
+                onChanged: (value){} ,
+              ),
+              RoundedInputField(
+                hintText: "Ім'я",
                   icon: Icons.accessibility,
-                  onChanged: (value){} ,
-                ), RoundedInputField(
-                  hintText: "Електронна адреса",
-                  icon: Icons.alternate_email_rounded,
-                  onChanged: (value){} ,
-                ),  RoundedInputField(
-                  hintText: "Телефон",
-                  icon: Icons.add_ic_call,
-                  onChanged: (value){} ,
-                ),
-                RoundPassword(onChange: (value){},),
-                // SizedBox(height: size.height*0.1),
-                RoundedButton(
-                  text: "Зареєструватися",
-                  press: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context){
-                              return Nav();
-                            }
-                        )
-                    );
-                  },
-                ),
-                // SizedBox(height: size.height*0.01),
-                OrDivider(),
+                onChanged: (value){} ,
+              ),*/ RoundedInputField(
+                hintText: "Електронна адреса",
+                icon: Icons.alternate_email_rounded,
+                onChanged: (value){} ,
+              ),  RoundedInputField(
+                hintText: "Телефон",
+                icon: Icons.add_ic_call,
+                onChanged: (value){} ,
+              ),
+              RoundPassword(onChange: (value){},),
+              SizedBox(height: size.height*0.1),
+              RoundedButton(
+                text: "Зареєструватися",
+                press: (){
+                  //TO DO USUAL REGISTRATION
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context){
+                            return Nav();
+                          }
+                      )
+                  );
+                },
+              ),
+              SizedBox(height: size.height*0.01),
+              OrDivider(),
+              ElevatedButton(
+                onPressed: signInWithGoogle,
+                child: Text("Google"),
+              ),         
               ],
             ),
           )
       ),
     );
+  }
+
+  Future<void> signInWithGoogle() async {
+    await Authentification().signInWithGoogle();
   }
 }
 

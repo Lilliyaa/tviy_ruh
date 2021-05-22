@@ -10,6 +10,7 @@ import 'package:flutter_apptest/theme.dart';
 import 'home_screen.dart';
 import 'lessons_screen.dart';
 import 'map_screen.dart';
+import 'welcome_screen_Components/logOut_screen.dart';
 
 class Nav extends StatefulWidget{
   @override
@@ -25,9 +26,9 @@ class _NavState extends State<Nav>{
     myMap(),
     Achieves(),
     Lessons(),
+   // LogOut(),
     More(),
     //Text('Profile'),
-    WelcomeScreen(),
   ];
   List<String> _screen_names = <String>[
     "Пошук",
@@ -35,7 +36,6 @@ class _NavState extends State<Nav>{
     "Екзаменаційні білети",
     "Заняття",
     "Додатково",
-    "Реєстрація"
   ];
 
   void _onItemTap(int index){
