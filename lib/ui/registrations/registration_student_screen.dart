@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter/src/widgets/icon.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
-import 'package:flutter_apptest/ui/welcome_screen_Components/design/devider.dart';
+import 'package:flutter_apptest/ui/design/devider.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import '../../Nav.dart';
+
 import '../design/round_btn.dart';
 import '../design/rounded_input_field.dart';
 
@@ -243,6 +243,8 @@ class _RegistrationStudentState extends State<RegistrationStudent> {
     }
     return true;
   }
+
+
 
   Future<void> createUserWithGoogle() async {
     User user  = await Authentification().signInWithGoogle();

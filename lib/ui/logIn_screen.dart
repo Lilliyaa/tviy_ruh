@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter/src/widgets/icon.dart';
 import 'package:flutter_apptest/ui/Nav.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'design/devider.dart';

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_apptest/ui/welcome_screen_Components/logIn_screen.dart';
 
 import 'design/round_btn.dart';
+import 'logIn_screen.dart';
 import 'registrations/registration_student_screen.dart';
 //import 'package:flutter_svg/svg.dart';
 
