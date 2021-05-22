@@ -1,4 +1,5 @@
 import 'package:flutter_apptest/constants/strings.dart';
+import 'package:flutter_apptest/model/achieve.dart';
 import 'package:flutter_apptest/model/paragraph.dart';
 import 'package:flutter_apptest/model/test.dart';
 import 'package:flutter_apptest/model/exam.dart';
@@ -100,7 +101,22 @@ static Future<List<Exam>> selectExams(int student_id) async{
     return providers;
   }
 
-  
+  static Future<List<Achieve>> selectAchieves(int student_id) async{
+    List<Achieve> achieves = [];
+    var uri = Uri.http(Strings.baseUrl, 'api/select_achieves.php');
+    var response = await http.post(uri, body: {
+      "student_id": json.encode(student_id)
+    });
+    if(response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body.toString());
+      for (var u in jsonData) {
+        Achieve achieve = Achieve.fromJson(u);
+        achieves.add(achieve);
+        print(achieve.toString());
+      }
+    }
+    return achieves;
+  }
   
 
 }
