@@ -27,9 +27,11 @@ class RoundedInputField extends StatelessWidget {
 
 class RoundPassword extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  final String text;
   const RoundPassword({
     Key key,
-    this.onChanged
+    this.onChanged,
+    this.text
   }) : super(key: key);
 
   @override
@@ -39,7 +41,7 @@ class RoundPassword extends StatelessWidget {
         onChanged: onChanged,
         obscureText: true,
         decoration: InputDecoration(
-          hintText: "Пароль",
+          hintText: text,
           icon: Icon(Icons.lock),
           suffixIcon: Icon(Icons.visibility),
           border: InputBorder.none,
@@ -60,9 +62,9 @@ class TextFieldContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      width: size.width * 0.8,
+      margin: EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+      width: size.width * 0.9,
       decoration: BoxDecoration(
           color: Color.fromRGBO(254, 187, 87, 1),
           borderRadius: BorderRadius.circular((29),)

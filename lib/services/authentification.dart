@@ -27,6 +27,20 @@ class Authentification{
     }
   }
 
+  Future<List> createUserWithEmail(String _email, String _password) async {
+    User user;
+    String error;
+    try {
+      user = (await _firebaseAuth.createUserWithEmailAndPassword(
+        email: _email,
+        password: _password,
+      )).user;
+    } on FirebaseAuthException catch(e){
+      error = e.message;
+    };
+    return [user, error];
+  }
+
   Future<List> signInWithEmail(String _email, String _password) async {
     User user;
     String error;

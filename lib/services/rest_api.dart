@@ -22,6 +22,15 @@ class APIManager{
     }
     return lessons;
   }
+  static Future<void> addUserStudent(String name, String surname, String email) async{
+    var uri = Uri.http(Strings.baseUrl, 'api/add_user_student.php');
+    await http.post(uri, body: {
+      "name": json.encode(name),
+      "surname": json.encode(surname),
+      "email": json.encode(email),
+    });
+
+  }
 
   static Future<String> getLessonText(int id) async{
     String lessonText = "";

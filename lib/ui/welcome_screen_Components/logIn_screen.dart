@@ -7,6 +7,7 @@ import 'package:flutter_apptest/ui/Nav.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'design/devider.dart';
 import 'design/round_btn.dart';
 import 'design/rounded_input_field.dart';
 
@@ -53,6 +54,7 @@ class _LogInState extends State<LogIn> {
                 } ,
               ),
               RoundPassword(
+                text: "Пароль",
                 onChanged: (value){
                 setState(() {
                   _password = value;
@@ -97,8 +99,8 @@ class _LogInState extends State<LogIn> {
                 ),
                 Container(
                   child: SizedBox(
-                      height: 70,
-                      width: 70,
+                      height: 80,
+                      width: 80,
                       child: FlatButton(
                           onPressed: signInWithFacebook,
                           padding: EdgeInsets.all(0.0),
@@ -146,36 +148,8 @@ class _LogInState extends State<LogIn> {
 
   Future<void> signInWithFacebook() async {
     await Authentification().signInWithFacebook();
-
   }
 
 }
 
-class OrDivider extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width*0.8,
-      child: Row(
-        children: <Widget>[
-          Expanded(child:
-          Divider(color: Color.fromRGBO(139, 103, 46, 1),
-                  height: 1.5,)
-          ),
-          Text("АБО",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(139, 103, 46, 1),
-            fontWeight: FontWeight.w600,
-          ),),
-          Expanded(child:
-          Divider(color: Color.fromRGBO(139, 103, 46, 1),
-            height: 1.5,)
-          ),
-        ],
-      )
-    );
-  }
-}
 

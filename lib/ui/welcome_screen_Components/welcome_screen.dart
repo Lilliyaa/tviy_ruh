@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/ui/welcome_screen_Components/logIn_screen.dart';
 
 import 'design/round_btn.dart';
-import 'registration_screen.dart';
+import 'registrations/registration_student_screen.dart';
 //import 'package:flutter_svg/svg.dart';
 
 class WelcomeScreen extends StatefulWidget{
@@ -52,20 +53,62 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               text: "Зареєструватись",
               fontSize: 1,
               press: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context){
-                          return Registration();
-                        }
-                    )
-                );
+                shooseRole(context);
+
               },
             )
           ],
         ),
       ),
     );
+  }
+
+  void shooseRole(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+
+            // backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            title: Text(
+              "Оберість свою роль",
+              style: Theme.of(context).appBarTheme.titleTextStyle,
+            ),
+            actions: [
+              CupertinoDialogAction(
+                isDefaultAction: true,
+                child: Text("Учень",
+                  style: Theme.of(context).textTheme.bodyText1,),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return RegistrationStudent();
+                  }));
+                },
+              ),
+              CupertinoDialogAction(
+                isDefaultAction: true,
+                child: Text("Школа",
+                style: Theme.of(context).textTheme.bodyText1,),
+                onPressed: () {
+                 /* Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Registration();
+                  }));*/
+                },
+              ),
+              CupertinoDialogAction(
+                isDefaultAction: true,
+                child: Text("Інструктор", style: Theme.of(context).textTheme.bodyText1,),
+
+                onPressed: () {
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //   return Registration();
+                  // }));
+                },
+              ),
+            ],
+          );
+        });
+
   }
 }
 
