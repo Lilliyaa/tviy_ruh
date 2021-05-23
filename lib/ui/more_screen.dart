@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/icon.dart';
 import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter_apptest/ui/statistic_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_apptest/ui/profile_user.dart';
 
 
 
@@ -60,7 +61,16 @@ class More extends StatelessWidget {
                     Icons.account_circle_sharp,
                     color: Color.fromRGBO(254, 187, 87, 1),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context){
+                              return ProfileUser();
+                            }
+                        )
+                    );
+                  },
                 ),
               ),
               SizedBox(
