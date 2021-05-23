@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
           }),
       floatingActionButton: FloatingActionButton(backgroundColor: Color.fromRGBO(254, 187, 87, 1),
         child: Icon(Icons.location_on_outlined, ),
-          onPressed: () => Navigator.push(context, MaterialPageRoute(builder:(context) => myMap())),
+          onPressed: () => Navigator.push(context, MaterialPageRoute(builder:(context) => myMap(providersList))),
 
       ),
     );
