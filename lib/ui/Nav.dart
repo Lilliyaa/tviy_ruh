@@ -24,11 +24,9 @@ class _NavState extends State<Nav>{
   List<Widget> _widgetOptions = <Widget>[
     Home(),
     SignRecognize(),
-    Achieves(),
+    Exams(),
     Lessons(),
-   // LogOut(),
     More(),
-    //Text('Profile'),
   ];
   List<String> _screen_names = <String>[
     "Пошук",
