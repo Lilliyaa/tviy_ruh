@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_apptest/assets/nav_icons.dart';
 import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/provider.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
-import 'constants.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -24,7 +22,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: Color.fromRGBO(252, 243, 227, 1.0),

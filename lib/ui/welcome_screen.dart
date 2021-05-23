@@ -7,13 +7,10 @@ import 'logIn_screen.dart';
 import 'registrations/registration_student_screen.dart';
 //import 'package:flutter_svg/svg.dart';
 
-class WelcomeScreen extends StatefulWidget{
+class WelcomeScreen extends StatefulWidget {
   final Function(User) onSignIn;
 
-  const WelcomeScreen({
-    Key key,
-    @required this.onSignIn
-  }) :super (key: key);
+  const WelcomeScreen({Key key, @required this.onSignIn}) : super(key: key);
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -21,7 +18,7 @@ class WelcomeScreen extends StatefulWidget{
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -31,30 +28,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Ласкаво просимо!",
+            Text(
+              "Ласкаво просимо!",
               style: Theme.of(context).textTheme.headline4,
             ),
-            SizedBox(height: size.height*0.5),
+            SizedBox(height: size.height * 0.5),
             RoundedButton(
               text: "          Увійти          ",
-              press: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context){
-                          return LogIn();
-                        }
-                    )
-                );
+              press: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return LogIn();
+                }));
               },
             ),
-            SizedBox(height: size.height*0.03),
+            SizedBox(height: size.height * 0.03),
             RoundedButton(
               text: "Зареєструватись",
               fontSize: 1,
-              press: (){
+              press: () {
                 shooseRole(context);
-
               },
             )
           ],
@@ -68,7 +60,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         context: context,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
-
             // backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             title: Text(
               "Оберість свою роль",
@@ -77,8 +68,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             actions: [
               CupertinoDialogAction(
                 isDefaultAction: true,
-                child: Text("Учень",
-                  style: Theme.of(context).textTheme.bodyText1,),
+                child: Text(
+                  "Учень",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return RegistrationStudent();
@@ -87,8 +80,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               CupertinoDialogAction(
                 isDefaultAction: true,
-                child: Text("Школа",
-                  style: Theme.of(context).textTheme.bodyText1,),
+                child: Text(
+                  "Школа",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
                 onPressed: () {
                   /* Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return Registration();
@@ -97,8 +92,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               CupertinoDialogAction(
                 isDefaultAction: true,
-                child: Text("Інструктор", style: Theme.of(context).textTheme.bodyText1,),
-
+                child: Text(
+                  "Інструктор",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
                 onPressed: () {
                   // Navigator.push(context, MaterialPageRoute(builder: (context) {
                   //   return Registration();
@@ -108,6 +105,5 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ],
           );
         });
-
   }
 }
