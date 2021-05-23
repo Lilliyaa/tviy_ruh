@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_apptest/constants/strings.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Provider {
   String type;
@@ -32,7 +33,12 @@ class Provider {
         avatar: json["avatar"],
         coordinates: json["coordinates"]
       );
-
+  LatLng getRealCoordinates(){
+    String latitude = coordinates.substring(0, coordinates.indexOf(','));
+    String longitude = coordinates.substring(coordinates.indexOf(',')+2, coordinates.length);
+    LatLng res = LatLng(double.parse(latitude), double.parse(longitude));
+    return res;
+  }
   String toString() =>
       "type: $type, id: $id, name: $name, category: $category, price: $price, address: $address, avatar: $avatar";
 }
