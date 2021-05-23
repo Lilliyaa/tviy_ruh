@@ -1,6 +1,7 @@
 import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/achieve.dart';
 import 'package:flutter_apptest/model/paragraph.dart';
+import 'package:flutter_apptest/model/sign_data.dart';
 import 'package:flutter_apptest/model/test.dart';
 import 'package:flutter_apptest/model/exam.dart';
 import 'package:flutter_apptest/model/provider.dart';
@@ -45,6 +46,24 @@ class APIManager{
       lessonText = jsonData;
     }
     return lessonText;
+  }
+
+  static Future<SignData> getSignData(int id) async{
+    List<SignData> signData = [];
+    var uri = Uri.http(Strings.baseUrl, 'api/load_sign_data.php');
+    var response = await http.post(uri, body: {
+      "id": json.encode(id)
+    });
+    print(response.statusCode);
+    if(response.statusCode == 200) {
+      var strData = response.body.toString();
+      var jsonData = jsonDecode(strData);
+      for (var u in jsonData) {
+        SignData temp = SignData.fromJson(u);
+        signData.add(temp);
+      }
+    }
+    return signData[0];
   }
 
   static Future<List<Test>> getExamTest(int id) async{
@@ -122,7 +141,7 @@ static Future<List<Exam>> selectExams(int student_id) async{
       for (var u in jsonData) {
         Achieve achieve = Achieve.fromJson(u);
         achieves.add(achieve);
-        print(achieve.toString());
+        //print(achieve.toString());
       }
     }
     return achieves;

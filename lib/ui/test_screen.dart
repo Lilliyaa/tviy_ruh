@@ -181,8 +181,6 @@ class _TestScreenState extends State<TestScreen> {
             }));
   }
 
-
-
   _endTest() async {
     int res = 0;
     for (var question in loadedTest.questions) {

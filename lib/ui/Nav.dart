@@ -10,6 +10,7 @@ import 'package:flutter_apptest/theme.dart';
 import 'home_screen.dart';
 import 'lessons_screen.dart';
 import 'map_screen.dart';
+import 'recognizing_screen.dart';
 
 class Nav extends StatefulWidget{
   @override
@@ -22,12 +23,10 @@ class _NavState extends State<Nav>{
   // Вот сюда вписіваем странички, которіе будут открываться в навигации, вместо Text("ololo")
   List<Widget> _widgetOptions = <Widget>[
     Home(),
-    myMap(),
-    Achieves(),
+    SignRecognize(),
+    Exams(),
     Lessons(),
-   // LogOut(),
     More(),
-    //Text('Profile'),
   ];
   List<String> _screen_names = <String>[
     "Пошук",
