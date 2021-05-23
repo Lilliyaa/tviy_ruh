@@ -10,6 +10,7 @@ class Provider {
   String price;
   String address;
   String avatar;
+  String coordinates;
 
   Provider(
       {this.type,
@@ -18,7 +19,8 @@ class Provider {
       this.category,
       this.price,
       this.address,
-      this.avatar});
+      this.avatar,
+      this.coordinates});
 
   factory Provider.fromJson(Map<String, dynamic> json) => Provider(
         type: json["type"],
@@ -28,6 +30,7 @@ class Provider {
         price: json["price"],
         address: json["address"],
         avatar: json["avatar"],
+        coordinates: json["coordinates"]
       );
 
   String toString() =>
