@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter/src/widgets/icon.dart';
+import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter_apptest/ui/statistic_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 
 
@@ -180,7 +183,9 @@ class More extends StatelessWidget {
                       ),
                     ),
                     icon: Icon(Icons.add_link),
-                    onPressed: () {},
+                    onPressed: () {
+                      openWeb();
+                    },
                   )),
               SizedBox(
                   height: 50,
@@ -201,10 +206,21 @@ class More extends StatelessWidget {
                       ),
                     ),
                     icon: Icon(Icons.exit_to_app),
-                    onPressed: () {},
+                    onPressed: () {
+                      signOut();
+                    },
                   )),
             ],
           ),
         ),
       ));
+  Future<void> signOut() async{
+    await Authentification().signOut();
+  }
+
+  void openWeb() async {
+    String url = "http://yihal27k.beget.tech/";
+    await canLaunch(url);
+    await launch(url);
+  }
 }

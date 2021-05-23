@@ -27,25 +27,13 @@ class _myMapState extends State<myMap> {
   BitmapDescriptor customSchoolMarker, customInstructorMarker;
 
   getCustomMarker() async {
-/*    final Uint8List markerIcon =
-        await getBytesFromAsset('assets/images/school_marker.png', 80);*/
     customSchoolMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, 'assets/images/school_marker.png');
-    customInstructorMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, 'assets/images/Instructor_marker.png');
+    customInstructorMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, 'assets/images/instructor_marker.png');
   }
 
-/*  Future<Uint8List> getBytesFromAsset(String path, int width) async {
-    ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
-        .buffer
-        .asUint8List();
-  }*/
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCustomMarker();
   }
@@ -62,7 +50,7 @@ class _myMapState extends State<myMap> {
             onTap: () {
               _customInfoWindowController.addInfoWindow(
                 GestureDetector(
-                  //TO DO ЗДЕСЬ ОКТКРЫВАТЬ ПРОФИЛЬ, ЧУВАКА МОЖНО ПРЯМО В НЕГО ПЕРЕДЕВАТЬ ЦЕЛИКОМ provider
+                  // TO DO: ЗДЕСЬ ОКТКРЫВАТЬ ПРОФИЛЬ, ЧУВАКА МОЖНО ПРЯМО В НЕГО ПЕРЕДЕВАТЬ ЦЕЛИКОМ provider
                   onTap: (){},
                   child: Column(
                     children: [
