@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/services/authentification.dart';
-import 'package:flutter/src/widgets/icon.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 import 'package:flutter_apptest/ui/design/devider.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -45,8 +44,10 @@ class _RegistrationStudentState extends State<RegistrationStudent> {
           body: Container(
             height: size.height,
             width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: ListView (
+            padding: EdgeInsets.symmetric(horizontal: 20),
+
+              //mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RoundedInputField(
                   hintText: "Ім'я",
