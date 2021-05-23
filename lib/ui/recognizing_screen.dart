@@ -5,7 +5,7 @@ import 'package:flutter_apptest/ui/design/round_btn.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 
-import 'design/sign_datails_screen.dart';
+import 'sign_datails_screen.dart';
 
 class SignRecognize extends StatefulWidget {
   @override

@@ -7,9 +7,9 @@ class SignData{
   SignData({this.image, this.text});
 
   factory SignData.fromJson(Map<String, dynamic> json) => SignData(
-    image: json["name"],
+    image: json["image"],
     text: json["text"],
   );
 
-  String toString() => "id: $image, right answers: $text";
+  String toString() => "image: $image, text: $text";
 }
