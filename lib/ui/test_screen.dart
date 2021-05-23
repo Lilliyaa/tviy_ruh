@@ -270,7 +270,7 @@ class CustomRadioState extends State<CustomRadio> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: (widget._question.answers.length * 60.0),
+      height: 400,
       child: new ListView.builder(
         itemCount: widget._question.answers.length,
         itemBuilder: (BuildContext context, int index) {

@@ -34,7 +34,7 @@ class _LessonsState extends State<Lessons>{
                   if(snapshot.hasData){
                   return new ListView.builder(
                     itemBuilder: (BuildContext context, int index, ){
-                      return new StuffInTiles(context, toTiles(snapshot.data)[index], snapshot.data[index]);
+                      return new StuffInTiles(context, 100, toTiles(snapshot.data)[index], snapshot.data[index]);
                     },
                     itemCount: snapshot.data.length,
                     padding: EdgeInsets.only(left: 16, right: 15),
@@ -53,10 +53,10 @@ class _LessonsState extends State<Lessons>{
   List<MyTile> toTiles(List<Paragraph> lessons) {
     List<MyTile> tiles= [];
     for(var lesson in lessons){
-      var tile = new MyTile(lesson.name, -1, <MyTile>[
-        new MyTile(Strings.lesson, 0),
-        new MyTile(Strings.video, 1),
-        new MyTile(Strings.test, 2),
+      var tile = new MyTile(lesson.name, 100, -1, <MyTile>[
+        new MyTile(Strings.lesson, -1, 0),
+        new MyTile(Strings.video, -1, 1),
+        new MyTile(Strings.test, -1, 2),
       ]);
       tiles.add(tile);
     }

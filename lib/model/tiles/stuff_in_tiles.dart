@@ -9,8 +9,9 @@ class StuffInTiles extends StatelessWidget  {
   final BuildContext context;
   final MyTile myTile;
   final Paragraph paragraph;
+  final int progress;
 
-  StuffInTiles(this.context, this.myTile, this.paragraph);
+  StuffInTiles(this.context, this.progress, this.myTile, this.paragraph);
 
   @override
   Widget build(BuildContext context) {

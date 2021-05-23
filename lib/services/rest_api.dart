@@ -1,4 +1,5 @@
 import 'package:flutter_apptest/constants/strings.dart';
+import 'package:flutter_apptest/model/Users/UserStudent.dart';
 import 'package:flutter_apptest/model/achieve.dart';
 import 'package:flutter_apptest/model/paragraph.dart';
 import 'package:flutter_apptest/model/sign_data.dart';
@@ -81,7 +82,18 @@ class APIManager{
     }
     return test;
   }
-  
+
+
+  static Future<void> switchUserToPremium(String email) async{
+    var uri = Uri.http(Strings.baseUrl, 'api/switch_to_premium.php');
+    var response = await http.post(uri, body: {
+      "email": json.encode(email)
+    });
+    if(response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body.toString());
+    }
+  }
+
   static Future<List<Test>> getLessonTest(int id) async{
     List<Test> test = [];
     var uri = Uri.http(Strings.baseUrl, 'api/load_lesson_test.php');
@@ -145,6 +157,22 @@ static Future<List<Exam>> selectExams(int student_id) async{
       }
     }
     return achieves;
+  }
+
+  static Future<UserStudent> loadUserStudent(String email) async {
+    List<UserStudent> users = [];
+    var uri = Uri.http(Strings.baseUrl, 'api/load_user_student.php');
+    var response = await http.post(uri, body: {
+      "email": json.encode(email)
+    });
+    if(response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body.toString());
+      for (var u in jsonData) {
+        UserStudent userStudent = UserStudent.fromJson(u);
+        users.add(userStudent);
+        return users[0];
+      }
+    }
   }
 
 }
