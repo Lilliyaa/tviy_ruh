@@ -12,10 +12,13 @@ import 'dart:convert';
 
 class APIManager{
 
-  static Future<List<Paragraph>> getLessonsData() async{
+  static Future<List<Paragraph>> getLessonsData(String email) async{
     List<Paragraph> lessons = [];
     var uri = Uri.http(Strings.baseUrl, 'api/load_all_lessons.php');
-    var response = await http.get(uri);
+    var response = await http.post(uri,
+        body: {
+          "email": json.encode(email),
+        });
     if(response.statusCode == 200) {
       var jsonData = jsonDecode(response.body.toString());
       for (var u in jsonData) {
@@ -172,6 +175,19 @@ static Future<List<Exam>> selectExams(int student_id) async{
         users.add(userStudent);
         return users[0];
       }
+    }
+  }
+
+  static Future<void> updateLessonData(String currentEmail, int paragraphId, int new_res) async {
+    var uri = Uri.http(Strings.baseUrl, 'api/update_lesson_progress.php');
+    var response = await http.post(uri, body: {
+      "email": json.encode(currentEmail),
+      "id": json.encode(paragraphId),
+      "new_res": json.encode(new_res),
+    });
+    if(response.statusCode == 200) {
+      var jsonData = response.body.toString();
+      var data;
     }
   }
 

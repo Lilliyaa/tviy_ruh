@@ -10,8 +10,9 @@ class StuffInTiles extends StatelessWidget  {
   final MyTile myTile;
   final Paragraph paragraph;
   final int progress;
+  final Function update;
 
-  StuffInTiles(this.context, this.progress, this.myTile, this.paragraph);
+  StuffInTiles(this.context, this.progress, this.myTile, this.paragraph, this.update);
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +26,17 @@ class StuffInTiles extends StatelessWidget  {
             if(t.type==0) {
               Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
-                    LessonScreen(paragraph, 0)),
+                    LessonScreen(paragraph, 0, update)),
               );
             } else if(t.type==1){
               Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
-                    LessonScreen(paragraph, 1)),
+                    LessonScreen(paragraph, 1, update)),
               );
             }else if(t.type==2){
               Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
-                    LessonScreen(paragraph, 2)),
+                    LessonScreen(paragraph, 2, update)),
               );
             }
           },
@@ -48,6 +49,7 @@ class StuffInTiles extends StatelessWidget  {
     return new CustomExpansionTile(
       backgroundColor: Colors.white,
       headerBackgroundColor: Colors.white,
+      progress: progress,
       key: new PageStorageKey<MyTile>(t),
       title:  Text(
         t.title,

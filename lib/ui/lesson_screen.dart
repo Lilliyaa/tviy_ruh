@@ -9,13 +9,14 @@ import 'lesson_video.dart';
 class LessonScreen extends StatefulWidget{
   int _selectedIndex;
   final Paragraph paragraph;
+  final Function update;
   List<Widget> _widgetOptions;
 
-  LessonScreen (this.paragraph, this._selectedIndex){
+  LessonScreen (this.paragraph, this._selectedIndex, this.update){
     _widgetOptions = <Widget>[
       LessonText(paragraph.id),
       LessonVideo(paragraph.video),
-      TestScreen(paragraph.id, "lesson"),
+      TestScreen(paragraph.id, "lesson", update),
     ];
   }
 
