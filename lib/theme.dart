@@ -8,6 +8,20 @@ ThemeData myLightTheme = ThemeData(
 
       headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
 
+      headline2: TextStyle(
+        //shadows: ShadowElement(0),
+        color: Color.fromRGBO(143, 141, 141, 1),
+        fontSize: 20,
+        fontWeight: FontWeight.w900,
+      ),
+
+      headline3: TextStyle(
+        //shadows: ShadowElement(0),
+        color: Color.fromRGBO(143, 141, 141, 1),
+        fontSize: 14,
+        fontWeight: FontWeight.w900,
+      ),
+
       //for welcomeScreen
       headline4: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
 
