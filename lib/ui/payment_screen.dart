@@ -9,9 +9,7 @@ import 'package:flutter_apptest/ui/design/round_btn.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 
 
-
 class Payment extends StatefulWidget{
-
 
   Function update;
 

@@ -4,9 +4,27 @@ import 'package:flutter_apptest/model/exam.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 import 'package:flutter_apptest/ui/test_screen.dart';
 
-class Exams extends StatelessWidget {
+class Exams extends StatefulWidget {
 
-  final Future<List<Exam>> _exams = APIManager.selectExams(1);
+  @override
+  _ExamsState createState() => _ExamsState();
+}
+
+class _ExamsState extends State<Exams> {
+  Future<List<Exam>> _exams;
+  int userId = 1;
+
+  void update(){
+    setState(() {
+      _exams = APIManager.selectExams(userId);
+    });
+  }
+
+  @override
+  void initState() {
+    _exams = APIManager.selectExams(userId);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +55,7 @@ class Exams extends StatelessWidget {
                   return Wrap(
                     spacing: 10,
                     runSpacing: 20,
-                    children: nexams.map((e) => ExamIco(e)).toList(),
+                    children: nexams.map((e) => ExamIco(e, update)).toList(),
                   );
                 }else{
                   return Center(
@@ -53,11 +71,12 @@ class Exams extends StatelessWidget {
   }
 }
 class ExamIco extends StatelessWidget {
+  final Function update;
   //const ExamIco({Key key}) : super(key: key);
 
   final Exam _exam;
 
-  const ExamIco(this._exam) : super();
+  const ExamIco(this._exam, this.update) : super();
 
   Color getColor() {
     Color color;
@@ -80,7 +99,7 @@ class ExamIco extends StatelessWidget {
   Widget build(BuildContext context) {
     return new GestureDetector(
         onTap: () {
-          _openTest(context, _exam.id);
+          _openTest(context, _exam.id, update);
         },
         child: Container(
           child: Text(_exam.id.toString()),
@@ -103,12 +122,12 @@ class ExamIco extends StatelessWidget {
     );
   }
 
-  _openTest(BuildContext context, int id) {
+  _openTest(BuildContext context, int id, Function update) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) {
-              return TestScreen(id, "exam");
+              return TestScreen(id, "exam", update);
             }
         )
     );

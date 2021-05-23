@@ -69,7 +69,7 @@ class _StatisticState extends State<Statistic> {
             IconButton(
               icon: const Icon(StatisticIcons.share),
               onPressed: () {
-                String results = "Агов, тільки подивись на мої результати!\n - тем вивчено: ${_data.allLessons},\n - тестів пройдено: ${_data.realExams},\n - винагород отримано: ${_data.realAchivment}!\n\n Ти також можеш вивчати ПДД разом із \"Твій рух\"";
+                String results = "Агов, тільки подивись на мої результати!\n - тем вивчено: ${_data.allLessons},\n - тестів пройдено: ${_data.realExams},\n - винагород отримано: ${_data.realAchivment}!\n\n Ти також можеш вивчати ПДД разом із \"Твій рух\" http://yihal27k.beget.tech/#/";
                 shareFile(results, "Мої результати!");
               },
             ),

@@ -6,13 +6,15 @@ import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/answer.dart';
 import 'package:flutter_apptest/model/question.dart';
 import 'package:flutter_apptest/model/test.dart';
+import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 
 class TestScreen extends StatefulWidget {
   int id;
   String type;
+  Function update;
 
-  TestScreen(this.id, this.type) {}
+  TestScreen(this.id, this.type, this.update) {}
 
   @override
   _TestScreenState createState() => _TestScreenState();
@@ -105,7 +107,7 @@ class _TestScreenState extends State<TestScreen> {
                                           Theme.of(context).textTheme.bodyText1,
                                     ),
                                     Text(
-                                      _time.toString(),
+                                      "5:13",
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                     )
@@ -170,7 +172,7 @@ class _TestScreenState extends State<TestScreen> {
                                 onPressed: () {
                                   _currentQuestion ==
                                           loadedTest.questions.length - 1
-                                      ? _endTest()
+                                      ? _endTest(loadedTest.id)
                                       : _nextQuestion();
                                 }),
                           ),
@@ -181,13 +183,19 @@ class _TestScreenState extends State<TestScreen> {
             }));
   }
 
-  _endTest() async {
+  _endTest(int paragraphId) async {
     int res = 0;
     for (var question in loadedTest.questions) {
       if (question.rightAnswered != null && question.rightAnswered) {
         res++;
       }
     }
+    if (widget.type == "exam") {
+      //TO DO
+    } else if (widget.type == "lesson") {
+      APIManager.updateLessonData(Authentification().getCurrentEmail(), paragraphId,res);
+    }
+
     await Future.delayed(Duration(milliseconds: 100));
     showDialog(
         context: context,
@@ -210,6 +218,7 @@ class _TestScreenState extends State<TestScreen> {
                 isDefaultAction: true,
                 child: Text("Повернутися"),
                 onPressed: () {
+                  widget.update();
                   Navigator.of(context).pop(true);
                   Navigator.of(context).pop(true);
                 },
