@@ -28,6 +28,7 @@ class CustomExpansionTile extends StatefulWidget {
     this.headerBackgroundColor,
     this.leading,
     @required this.title,
+    @required this.progress,
     this.backgroundColor,
     this.iconColor,
     this.onExpansionChanged,
@@ -47,6 +48,7 @@ class CustomExpansionTile extends StatefulWidget {
   /// Typically a [Text] widget.
   final Widget title;
 
+  final int progress;
   /// Called when the tile expands or collapses.
   ///
   /// When the tile starts expanding, this function is called with the value
@@ -147,6 +149,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
   Widget _buildChildren(BuildContext context, Widget child) {
     final Color borderSideColor = _borderColor.value ?? Colors.transparent;
     final Color titleColor = _headerColor.value;
+    final Size size = MediaQuery.of(context).size;
 
     return Container(
       child: Column(
@@ -175,11 +178,20 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                       .copyWith(color: titleColor),
                   child: Row(
                     children: [
-                      // Тут в будующем будет иконочка с прогрессом. Когда добавим, не забть уменьшить ширину текста
-                      //Icon(Icons.circle_notifications),
                       Container(
-                        // вот тут уменьшить
-                        width: 250,
+                          width: 50,
+                          height: 50,
+                          margin: EdgeInsets.only(right: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color:  Theme.of(context).appBarTheme.backgroundColor,
+                          ),
+                          child: Center(
+                            child: Text(widget.progress.toString()+"%", textAlign: TextAlign.center,)),
+                        ),
+
+                      Container(
+                        width: size.width*0.55,
                         child: widget.title,
                       )
                     ]
