@@ -5,11 +5,9 @@ import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter_apptest/ui/statistic_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_apptest/ui/profile_user.dart';
+import 'package:flutter_apptest/ui/profile_instructor.dart';
+import 'package:flutter_apptest/ui/profile_school.dart';
 
-
-
-
-import 'Nav.dart';
 import 'achieves_screen.dart';
 
 
@@ -67,6 +65,8 @@ class More extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context){
                               return ProfileUser();
+                              //return ProfileSchool();
+                              //return ProfileCInstructor();
                             }
                         )
                     );
