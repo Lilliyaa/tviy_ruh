@@ -1,4 +1,4 @@
-/*
+
 import 'dart:convert';
 
 class Exam{
@@ -13,4 +13,4 @@ class Exam{
   );
 
   String toString() => "id: $id, right answers: $rightAnswers";
-}*/
+}

@@ -99,7 +99,7 @@ class APIManager{
     return test;
   }
 
-/*static Future<List<Exam>> selectExams(int student_id) async{
+static Future<List<Exam>> selectExams(int student_id) async{
     List<Exam> exams = [];
     var uri = Uri.http(Strings.baseUrl, 'api/select_exams.php');
     var response = await http.post(uri, body: {
@@ -113,7 +113,7 @@ class APIManager{
       }
     }
     return exams;
-  }*/
+  }
 
 
   static Future<List<Provider>> getProviderData() async{
