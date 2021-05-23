@@ -127,6 +127,14 @@ class _myMapState extends State<myMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Мапа",
+            style: Theme.of(context).appBarTheme.titleTextStyle,
+          ),
+          //backgroundColor: Color(0xfffebb57),
+        ),
         body: Stack(
       children: [
         GoogleMap(

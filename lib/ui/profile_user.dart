@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apptest/constants/strings.dart';
+import 'package:flutter_apptest/model/Users/UserStudent.dart';
 import 'package:flutter_apptest/theme.dart';
 
-class DataFormDB{
-  String name;
-  String mail;
-  String image;
-}
-
-//Глобальные
-DataFormDB _data = new DataFormDB();
 
 
 class ProfileUser extends StatefulWidget {
-  ProfileUser()
-  {
-    _data.name = "Микола Хвильовий";
-    _data.mail = "mikola.hvilyuvii@gmail.com";
-    _data.image = "";
-  }
+
+  UserStudent userStudent;
+  ProfileUser(this.userStudent);
 
   @override
   _ProfileUserState createState() => _ProfileUserState();
@@ -46,7 +37,10 @@ class _ProfileUserState extends State<ProfileUser> {
           child: CircleAvatar(
             child: ClipOval(
               child: Image.network(
-                  _data.image,
+                  "http://" +
+                      Strings.baseUrl +
+                      "/avatars/" +
+                  widget.userStudent.avatar,
                   height: 200,
                   width: 250,
                   fit: BoxFit.fill),
@@ -64,7 +58,7 @@ class _ProfileUserState extends State<ProfileUser> {
                 Icons.person,
                 color: Color.fromRGBO(142, 140, 140, 1)),
             SizedBox(width: 30,),
-            Text(_data.name,
+            Text(widget.userStudent.name,
                 style: Theme.of(context).textTheme.headline2),],
         ),
         SizedBox(height: 20,),
@@ -76,7 +70,7 @@ class _ProfileUserState extends State<ProfileUser> {
               Icons.mail_outline,
               color: Color.fromRGBO(142, 140, 140, 1)),
             SizedBox(width: 30,),
-            Text(_data.mail,
+            Text(widget.userStudent.email,
             style: Theme.of(context).textTheme.headline2),
           ],
         ),

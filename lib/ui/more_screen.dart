@@ -12,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'Nav.dart';
 import 'achieves_screen.dart';
 import 'payment_screen.dart';
+import 'profile_user.dart';
 
 class More extends StatefulWidget {
   @override
@@ -69,7 +70,10 @@ class _MoreState extends State<More> {
                             ),
                             press: () {
                               // TO DO: open profile, just pass snapshot.data  :)
-
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return ProfileUser(snapshot.data);
+                                  }));
                             }),
                         SimpleTextIconButton(
                             text: 'Статистика',

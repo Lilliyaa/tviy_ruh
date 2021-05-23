@@ -56,6 +56,14 @@ class _StatisticState extends State<Statistic> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      centerTitle: true,
+      title: Text(
+        "Статистика",
+        style: Theme.of(context).appBarTheme.titleTextStyle,
+      ),
+      //backgroundColor: Color(0xfffebb57),
+    ),
     backgroundColor: myLightTheme.primaryColor,
     body: ListView(
       padding: EdgeInsets.all(16),
