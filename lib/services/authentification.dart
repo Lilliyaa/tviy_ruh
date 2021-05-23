@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -83,6 +84,10 @@ class Authentification{
             'Here\'s the error Facebook gave us: ${result.errorMessage}');
         break;
     }
+  }
+
+  String getCurrentEmail(){
+   return _firebaseAuth.currentUser.email;
   }
 
   Future <void> signOut() async {

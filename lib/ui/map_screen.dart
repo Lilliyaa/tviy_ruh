@@ -27,8 +27,17 @@ class _myMapState extends State<myMap> {
   BitmapDescriptor customSchoolMarker, customInstructorMarker;
 
   getCustomMarker() async {
-    customSchoolMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, 'assets/images/school_marker.png');
-    customInstructorMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, 'assets/images/instructor_marker.png');
+    final Uint8List markerIcon1 = await getBytesFromAsset('assets/images/school_marker.png', 100);
+    customSchoolMarker =  BitmapDescriptor.fromBytes(markerIcon1);
+    final Uint8List markerIcon2 = await getBytesFromAsset('assets/images/instructor_marker.png', 100);
+    customInstructorMarker = BitmapDescriptor.fromBytes(markerIcon2);
+  }
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
   }
 
 
