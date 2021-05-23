@@ -25,14 +25,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         margin: EdgeInsets.symmetric(vertical: 100),
         height: size.height,
         width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView (
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               "Ласкаво просимо!",
               style: Theme.of(context).textTheme.headline4,
             ),
-            SizedBox(height: size.height * 0.5),
+            SizedBox(height: size.height * 0.3),
             RoundedButton(
               text: "          Увійти          ",
               press: () {
