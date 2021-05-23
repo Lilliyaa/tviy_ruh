@@ -4,6 +4,10 @@ import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/provider.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 
+import 'package:flutter_apptest/ui/map_screen.dart';
+import 'constants.dart';
+
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -41,7 +45,11 @@ class _HomeState extends State<Home> {
               return Center(child: CircularProgressIndicator());
             }
           }),
-      floatingActionButton: FloatingActionButton(),
+      floatingActionButton: FloatingActionButton(backgroundColor: Color.fromRGBO(254, 187, 87, 1),
+        child: Icon(Icons.location_on_outlined, ),
+          onPressed: () => Navigator.push(context, MaterialPageRoute(builder:(context) => myMap())),
+
+      ),
     );
   }
 
