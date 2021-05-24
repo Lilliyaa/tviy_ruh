@@ -3,6 +3,7 @@ import 'package:flutter_apptest/model/Users/UserStudent.dart';
 import 'package:flutter_apptest/model/achieve.dart';
 import 'package:flutter_apptest/model/paragraph.dart';
 import 'package:flutter_apptest/model/sign_data.dart';
+import 'package:flutter_apptest/model/statistics.dart';
 import 'package:flutter_apptest/model/test.dart';
 import 'package:flutter_apptest/model/exam.dart';
 import 'package:flutter_apptest/model/provider.dart';
@@ -193,4 +194,20 @@ static Future<List<Exam>> selectExams(int student_id) async{
     }
   }
 
+  static Future<List<Statistics>> loadStatistics(String student_email) async{
+    List<Statistics> statistics = [];
+    var uri = Uri.http(Strings.baseUrl, 'api/select_statistics.php');
+    var response = await http.post(uri, body: {
+      'email': json.encode(student_email)
+    });
+    if(response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body.toString());
+      for (var u in jsonData) {
+        Statistics row = Statistics.fromJson(u);
+        statistics.add(row);
+        print(row.toString());
+      }
+    }
+    return statistics;
+  }
 }
