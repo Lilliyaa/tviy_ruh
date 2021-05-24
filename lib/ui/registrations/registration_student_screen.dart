@@ -45,7 +45,7 @@ class _RegistrationStudentState extends State<RegistrationStudent> {
             height: size.height,
             width: double.infinity,
             child: ListView (
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.only(left: 20, right: 20, top: 100),
 
               //mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[

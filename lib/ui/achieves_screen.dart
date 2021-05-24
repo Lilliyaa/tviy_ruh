@@ -1,11 +1,18 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/achieve.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
+import 'package:flutter_apptest/ui/design/round_btn.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Achieves extends StatelessWidget {
+class Achieves extends StatefulWidget {
+  @override
+  _AchievesState createState() => _AchievesState();
+}
+
+class _AchievesState extends State<Achieves> {
   final Future<List<Achieve>> _achieves = APIManager.selectAchieves(1);
 
   int countOpen(value) {
@@ -142,26 +149,88 @@ class AchieveIco extends StatelessWidget {
   Widget build(BuildContext context) {
     var colorTheme = getColors(_achieve.color);
     String iconPath = "empty.png";
-    if(_achieve.progress == 100){
+    if (_achieve.progress == 100) {
       iconPath = _achieve.icon;
     }
-    return Container(
-      child: Image.network(
-        "http://" + Strings.baseUrl + "/achieves/" + iconPath,
-        //color: colorTheme['icon'],
-      ),
-      alignment: Alignment.center,
-      height: 67,
-      width: 67,
-      decoration: BoxDecoration(
-        color: colorTheme['background'],
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: colorTheme['border'],
-          style: BorderStyle.solid,
-          width: 5,
+    return GestureDetector(
+      onTap: () {
+        _showPopUp(context, colorTheme, _achieve);
+      },
+      child: Container(
+        child: Image.network(
+          "http://" + Strings.baseUrl + "/achieves/" + iconPath,
+          //color: colorTheme['icon'],
+        ),
+        alignment: Alignment.center,
+        height: 67,
+        width: 67,
+        decoration: BoxDecoration(
+          color: colorTheme['background'],
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: colorTheme['border'],
+            style: BorderStyle.solid,
+            width: 5,
+          ),
         ),
       ),
+
     );
   }
-}
+    _showPopUp(BuildContext context, Map<String, Color> colorTheme, Achieve achieve) async {
+      await Future.delayed(Duration(milliseconds: 100));
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return CupertinoAlertDialog(
+              // backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+              content: Container(
+                child:  Column(
+                  children: [
+                    Row(
+                      children: [Container(
+                        child: Image.network(
+                          "http://" + Strings.baseUrl + "/achieves/" + achieve.icon,
+                          //color: colorTheme['icon'],
+                        ),
+                        alignment: Alignment.center,
+                        height: 90,
+                        width: 90,
+                        decoration: BoxDecoration(
+                          color: colorTheme['background'],
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: colorTheme['border'],
+                            style: BorderStyle.solid,
+                            width: 5,
+                          ),
+                        ),
+                      ),
+                        Center(
+                            child: Container(
+                              width: 130,
+                                padding: EdgeInsets.symmetric(horizontal: 5),
+                                child: Center(
+                                  child: Text(_achieve.name, style: Theme.of(context).appBarTheme.titleTextStyle
+                                ),
+                                )
+                            )
+                        )
+                      ],
+                    ),
+                    RoundedButton(
+                      text: "Oк",
+                      verPadding: 10,
+                      horPadding: 10,
+                      width: 70,
+                      press: (){},
+                    )
+                  ],
+                )
+              )
+
+            );
+          });
+    }
+
+  }
