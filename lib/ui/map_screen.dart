@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/provider.dart';
+import 'package:flutter_apptest/ui/profile_school.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
@@ -60,7 +61,12 @@ class _myMapState extends State<myMap> {
               _customInfoWindowController.addInfoWindow(
                 GestureDetector(
                   // TO DO: ЗДЕСЬ ОКТКРЫВАТЬ ПРОФИЛЬ, ЧУВАКА МОЖНО ПРЯМО В НЕГО ПЕРЕДЕВАТЬ ЦЕЛИКОМ provider
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return ProfileSchool(provider);
+                        }));
+                  },
                   child: Column(
                     children: [
                       Expanded(

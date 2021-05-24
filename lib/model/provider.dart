@@ -12,6 +12,7 @@ class Provider {
   String address;
   String avatar;
   String coordinates;
+  String contact;
 
   Provider(
       {this.type,
@@ -21,7 +22,8 @@ class Provider {
       this.price,
       this.address,
       this.avatar,
-      this.coordinates});
+      this.coordinates,
+      this.contact});
 
   factory Provider.fromJson(Map<String, dynamic> json) => Provider(
         type: json["type"],
@@ -31,7 +33,8 @@ class Provider {
         price: json["price"],
         address: json["address"],
         avatar: json["avatar"],
-        coordinates: json["coordinates"]
+        coordinates: json["coordinates"],
+      contact: json["contact"]
       );
   LatLng getRealCoordinates(){
     String latitude = coordinates.substring(0, coordinates.indexOf(','));
@@ -40,5 +43,5 @@ class Provider {
     return res;
   }
   String toString() =>
-      "type: $type, id: $id, name: $name, category: $category, price: $price, address: $address, avatar: $avatar";
+      "type: $type, id: $id, name: $name, category: $category, price: $price, address: $address, avatar: $avatar, contact: $contact";
 }
