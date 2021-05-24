@@ -6,6 +6,7 @@ import 'package:flutter_apptest/model/paragraph.dart';
 import 'package:flutter_apptest/model/tiles/stuff_in_tiles.dart';
 import 'package:flutter_apptest/services/authentification.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class Lessons extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class Lessons extends StatefulWidget {
 }
 
 class _LessonsState extends State<Lessons> {
+  FlutterLocalNotificationsPlugin localNotificationsPlugin = new FlutterLocalNotificationsPlugin();
   Future<List<Paragraph>> _lessons;
   String _email;
 
@@ -20,6 +22,7 @@ class _LessonsState extends State<Lessons> {
     setState(() {
       _lessons = APIManager.getLessonsData(_email);
     });
+    _showNotofocation();
   }
 
   @override
@@ -27,6 +30,12 @@ class _LessonsState extends State<Lessons> {
     _email = Authentification().getCurrentEmail();
     _lessons = APIManager.getLessonsData(_email);
     super.initState();
+    var androidInitialize = new AndroidInitializationSettings('ic_launcher');
+    var IOSInialize = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
+      android: androidInitialize, iOS: IOSInialize
+    );
+    localNotificationsPlugin.initialize(initializationSettings);
   }
 
   @override
@@ -72,5 +81,12 @@ class _LessonsState extends State<Lessons> {
       tiles.add(tile);
     }
     return tiles;
+  }
+
+  Future _showNotofocation() async{
+    var andDroidDetails = new AndroidNotificationDetails("channelId", "Local Notofication", "Description");
+    var iosDetails = new IOSNotificationDetails();
+    var general = new NotificationDetails(android: andDroidDetails, iOS: iosDetails);
+    await localNotificationsPlugin.show(0, "Який ти сьогодні розумний!", "Скоріше поділись результатом з друзями", general);
   }
 }
