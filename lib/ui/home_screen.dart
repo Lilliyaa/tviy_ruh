@@ -5,6 +5,8 @@ import 'package:flutter_apptest/model/provider.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 
 import 'package:flutter_apptest/ui/map_screen.dart';
+import 'package:flutter_apptest/ui/profile_instructor.dart';
+import 'package:flutter_apptest/ui/profile_school.dart';
 import 'constants.dart';
 
 
@@ -16,7 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Future<List<Provider>> providers;
   List<Provider> providersList;
-  List<Container> itemsData = [];
+  List<Widget> itemsData = [];
 
   @override
   void initState() {
@@ -57,135 +59,143 @@ class _HomeState extends State<Home> {
     itemsData = [];
     providersList.forEach((provider) {
       itemsData.add(
-        Container(
-          padding: EdgeInsets.all(10),
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              color: Color.fromRGBO(140, 140, 140, 1.0),
-              boxShadow: [
-                BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-              ]),
-          child: Column(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  provider.type,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontFamily: "Roboto",
-                    color: Colors.white,
+        GestureDetector(
+          onTap: (){
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+                return ProfileSchool(provider);
+              }));
+          },
+          child:  Container(
+            padding: EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                color: Color.fromRGBO(140, 140, 140, 1.0),
+                boxShadow: [
+                  BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
+                ]),
+            child: Column(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    provider.type,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: "Roboto",
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.network("http://" +
-                        Strings.baseUrl +
-                        "/avatars/" +
-                        (provider.avatar != null ? provider.avatar : " ")),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        provider.name,
-                        style: const TextStyle(
-                          fontFamily: "Roboto",
-                          fontSize: 20,
-                          color: Colors.white,
-                          decoration: TextDecoration.underline,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.network("http://" +
+                          Strings.baseUrl +
+                          "/avatars/" +
+                          (provider.avatar != null ? provider.avatar : " ")),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          provider.name,
+                          style: const TextStyle(
+                            fontFamily: "Roboto",
+                            fontSize: 20,
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Категорії: ",
+                                    style: const TextStyle(
+                                        fontFamily: "Roboto",
+                                        fontSize: 17,
+                                        color: Colors.white),
+                                  ),
+                                  Text(
+                                    "Ціна: ",
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ]),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  "Категорії: ",
+                                  provider.category,
                                   style: const TextStyle(
-                                      fontFamily: "Roboto",
                                       fontSize: 17,
-                                      color: Colors.white),
+                                      fontFamily: "Roboto",
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  "Ціна: ",
+                                  provider.price,
                                   style: const TextStyle(
-                                    fontSize: 17,
-                                    color: Colors.white,
+                                      fontSize: 17,
+                                      fontFamily: "Roboto",
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold
                                   ),
                                 ),
-                              ]),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                provider.category,
-                                style: const TextStyle(
-                                    fontSize: 17,
-                                    fontFamily: "Roboto",
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                provider.price,
-                                style: const TextStyle(
-                                    fontSize: 17,
-                                    fontFamily: "Roboto",
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
 
 
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        alignment: Alignment.bottomRight,
-                        width: 210,
-                        child:  Align(
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
                           alignment: Alignment.bottomRight,
-                          child: Text(
-                          provider.address,
-                            textAlign: TextAlign.right,
-                          style: const TextStyle(
-                            fontSize: 17,
-                            color: Colors.white,
-                            //fontWeight: FontWeight.bold
+                          width: 210,
+                          child:  Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              provider.address,
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                fontSize: 17,
+                                color: Colors.white,
+                                //fontWeight: FontWeight.bold
+                              ),
+                            ),
                           ),
-                        ),
-                        ),
-                      )
+                        )
 
-                    ],
-                  )
-                ],
-              ),
-            ],
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+            // Image.asset(
+            //   "assets/images/${post["image"]}",
+            //   height: double.infinity1,
+            // )
           ),
-          // Image.asset(
-          //   "assets/images/${post["image"]}",
-          //   height: double.infinity1,
-          // )
-        ),
+        )
       );
     });
   }
