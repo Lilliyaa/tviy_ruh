@@ -19,7 +19,7 @@ class Nav extends StatefulWidget{
 
 class _NavState extends State<Nav>{
   int _selectedIndex = 0;
-  String text = "bar";
+  String text = "Пошук";
   // Вот сюда вписіваем странички, которіе будут открываться в навигации, вместо Text("ololo")
   List<Widget> _widgetOptions = <Widget>[
     Home(),
@@ -46,14 +46,17 @@ class _NavState extends State<Nav>{
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
+
+      appBar: PreferredSize(
+      preferredSize: Size.fromHeight(_selectedIndex ==0? 0:50),
+      child: AppBar(
         centerTitle: true,
         title: Text(
           text,
           style: Theme.of(context).appBarTheme.titleTextStyle,
         ),
         //backgroundColor: Color(0xfffebb57),
-      ),
+      ),),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

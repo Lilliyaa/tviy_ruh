@@ -131,10 +131,12 @@ static Future<List<Exam>> selectExams(int student_id) async{
   }
 
 
-  static Future<List<Provider>> getProviderData() async{
+  static Future<List<Provider>> getProviderData(String text) async{
     List<Provider> providers = [];
     var uri = Uri.http(Strings.baseUrl, 'api/load_provider.php');
-    var response = await http.get(uri);
+    var response = await http.post(uri, body: {
+      "text": json.encode(text)
+    });
     if(response.statusCode == 200) {
       var jsonData = jsonDecode(response.body.toString());
       for (var u in jsonData) {

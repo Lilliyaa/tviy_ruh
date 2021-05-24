@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apptest/constants/strings.dart';
 import 'package:flutter_apptest/model/provider.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
+import 'package:flutter_apptest/ui/design/rounded_input_field.dart';
 
 import 'package:flutter_apptest/ui/map_screen.dart';
 import 'package:flutter_apptest/ui/profile_instructor.dart';
@@ -16,13 +17,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String _text = "";
   Future<List<Provider>> providers;
   List<Provider> providersList;
   List<Widget> itemsData = [];
 
   @override
   void initState() {
-    providers = APIManager.getProviderData();
+    providers = APIManager.getProviderData(_text);
     super.initState();
   }
 
@@ -30,23 +32,35 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        title:  RoundedInputField(
+          icon: Icons.search_sharp,
+          onChanged: (value){
+            setState(() {
+              _text = value;
+              providers = APIManager.getProviderData(_text);
+            });
+          },
+        ),
+      ),
       backgroundColor: Color.fromRGBO(252, 243, 227, 1.0),
-      body: FutureBuilder<List<Provider>>(
-          future: providers,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              providersList = snapshot.data;
-              formCards();
-              return ListView.builder(
-                  itemCount: itemsData.length,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return itemsData[index];
-                  });
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          }),
+      body:  FutureBuilder<List<Provider>>(
+              future: providers,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  providersList = snapshot.data;
+                  formCards();
+                  return ListView.builder(
+                      itemCount: itemsData.length,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return itemsData[index];
+                      });
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              }
+        ),
       floatingActionButton: FloatingActionButton(backgroundColor: Color.fromRGBO(254, 187, 87, 1),
         child: Icon(Icons.location_on_outlined, ),
           onPressed: () => Navigator.push(context, MaterialPageRoute(builder:(context) => myMap(providersList))),
