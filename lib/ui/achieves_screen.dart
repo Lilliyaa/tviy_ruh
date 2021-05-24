@@ -5,7 +5,12 @@ import 'package:flutter_apptest/model/achieve.dart';
 import 'package:flutter_apptest/services/rest_api.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Achieves extends StatelessWidget {
+class Achieves extends StatefulWidget {
+  @override
+  _AchievesState createState() => _AchievesState();
+}
+
+class _AchievesState extends State<Achieves> {
   final Future<List<Achieve>> _achieves = APIManager.selectAchieves(1);
 
   int countOpen(value) {
@@ -145,7 +150,10 @@ class AchieveIco extends StatelessWidget {
     if(_achieve.progress == 100){
       iconPath = _achieve.icon;
     }
-    return Container(
+    GestureDetector(onTap: (){
+
+    }
+    return  Container(
       child: Image.network(
         "http://" + Strings.baseUrl + "/achieves/" + iconPath,
         //color: colorTheme['icon'],
@@ -162,6 +170,30 @@ class AchieveIco extends StatelessWidget {
           width: 5,
         ),
       ),
+    ),
     );
   }
 }
+
+
+/*
+_achivestup(int paragraphId) async {
+    await Future.delayed(Duration(milliseconds: 100));
+    showDialog(
+
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            // backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            title: Text(
+              "За успіхи!",
+              style: Theme.of(context).appBarTheme.titleTextStyle,
+            ),
+            content: Text(
+              "Ви пройшли 50% тестів ",
+
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+
+
+          );
+        });*/
